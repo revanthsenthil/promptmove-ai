@@ -41,6 +41,10 @@ jobs:
         with:
           python-version: '3.10.13'
           
+      # Installs system dependencies
+      - name: Install system dependencies
+        run: sudo apt-get install -y portaudio19-dev python-pyaudio python3-pyaudio
+        
       # Installs dependencies
       - name: Install dependencies
         run: |
