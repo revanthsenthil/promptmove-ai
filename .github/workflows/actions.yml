@@ -43,8 +43,8 @@ jobs:
           
       # Installs system dependencies
       - name: Install system dependencies
-        run: sudo apt-get install -y portaudio19-dev python-pyaudio python3-pyaudio
-        
+        run: sudo apt-get install -y portaudio19-dev
+
       # Installs dependencies
       - name: Install dependencies
         run: |
