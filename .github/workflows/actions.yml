@@ -54,3 +54,10 @@ jobs:
       # Runs tests
       - name: Run tests
         run: pytest tests  
+      
+      # linter
+      - name: lint with ruff
+        run: |
+          pip install ruff
+          ruff check .
+

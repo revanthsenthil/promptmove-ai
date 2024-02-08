@@ -1,5 +1,3 @@
-from google.cloud import aiplatform
-
 import vertexai
 
 from vertexai.preview.language_models import TextGenerationModel
