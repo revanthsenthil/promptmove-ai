@@ -10,7 +10,6 @@ def test_MicrophoneStream_context_manager():
         mock_audio_interface.open.return_value = mock_audio_stream
 
         stream = MicrophoneStream()
-        print(stream._rate)
         with stream:
             mock_audio_interface.open.assert_called_once()
             assert stream.closed == False
