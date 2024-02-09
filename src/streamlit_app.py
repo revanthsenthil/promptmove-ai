@@ -12,6 +12,8 @@ from google.cloud import speech
 from src.audio.MicrophoneStream import MicrophoneStream
 from src.audio.MicrophoneStream import RATE
 
+
+# Adopted from Google Cloud's Speech-to-Text API documentation.
 def listen_print_loop(responses: object) -> str:
     """Iterates through server responses and prints them.
 
@@ -74,6 +76,7 @@ def listen_print_loop(responses: object) -> str:
 
     return transcript
 
+# Adopted from Google Cloud's Speech-to-Text API documentation.
 def transcribe():
     """Transcribe speech from audio file."""
     # See http://g.co/cloud/speech/docs/languages
