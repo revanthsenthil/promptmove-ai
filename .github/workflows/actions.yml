@@ -24,26 +24,18 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-
+      
       # Sets up a Python environment
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10.13'
-          
+        
       # Installs system dependencies
       - name: Install system dependencies
-        run: sudo apt-get install -y portaudio19-dev
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y portaudio19-dev
 
       # Installs dependencies
       - name: Install dependencies
@@ -53,7 +45,11 @@ jobs:
 
       # Runs tests
       - name: Run tests
-        run: pytest tests  
+        run: |
+          python -m pip install pytest
+
+          export PYTHONPATH=".:$PYTHONPATH"
+          python tests/test_microphone.py
       
       # linter
       - name: lint with ruff

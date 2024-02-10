@@ -1,5 +1,4 @@
 # will be updated with the addition of packages
-pytest
 pyaudio
 SpeechRecognition
 streamlit

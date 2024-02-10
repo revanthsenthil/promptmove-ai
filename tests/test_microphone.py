@@ -12,8 +12,8 @@ def test_MicrophoneStream_context_manager():
         stream = MicrophoneStream()
         with stream:
             mock_audio_interface.open.assert_called_once()
-            assert stream.closed == False
+            assert stream.closed is False
 
         mock_audio_stream.stop_stream.assert_called_once()
         mock_audio_stream.close.assert_called_once()
-        assert stream.closed == True
+        assert stream.closed is True

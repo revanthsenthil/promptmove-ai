@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 
 def get_requirements(path: str):
-    return [l.strip() for l in open(path)]
+    return [req.strip() for req in open(path)]
 
 
 setup(
