@@ -49,7 +49,7 @@ jobs:
           python -m pip install pytest
 
           export PYTHONPATH=".:$PYTHONPATH"
-          python tests/test_microphone.py
+          pytest tests
       
       # linter
       - name: lint with ruff
