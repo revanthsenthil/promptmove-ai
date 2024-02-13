@@ -47,8 +47,8 @@ jobs:
       - name: Run tests
         run: |
           python -m pip install pytest
+          export PYTHONPATH=".:$PYTHONPATH"
           pytest tests
-      #    export PYTHONPATH=".:$PYTHONPATH"
       
       # linter
       - name: lint with ruff
