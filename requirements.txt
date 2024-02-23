@@ -1,4 +1,6 @@
 # will be updated with the addition of packages
-pytest
 pyaudio
 SpeechRecognition
+streamlit
+google-cloud-speech
+google-cloud-aiplatform
