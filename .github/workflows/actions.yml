@@ -44,14 +44,14 @@ jobs:
           pip install -e .
       
       # Google Cloud SDK
-      - id: 'auth'
-        uses: 'google-github-actions/auth@v2'
+      #- id: 'auth'
+      #  uses: 'google-github-actions/auth@v2'
 
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v2'
+      #- name: 'Set up Cloud SDK'
+      #  uses: 'google-github-actions/setup-gcloud@v2'
 
-      - name: 'Use gcloud CLI'
-        run: 'gcloud info'
+      #- name: 'Use gcloud CLI'
+      #  run: 'gcloud info'
 
       # Runs tests
       - name: Run tests
