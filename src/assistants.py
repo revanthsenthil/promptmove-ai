@@ -64,7 +64,7 @@ def main():
 
 	# Function for generating LLM response
 	def generate_response(user_input):
-		if user_input in [None, ""] or type(user_input) != str:
+		if user_input in [None, ""] or not isinstance(user_input, str):
 			return "Invalid input. Please try again."
 
 		# load session's assistant
