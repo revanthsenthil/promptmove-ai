@@ -1,0 +1,74 @@
+{"house": {
+        "temperature": 72,
+        "rooms": [
+            {
+                "name": "living room",
+                "occupants": [
+                    {
+                        "name": "John",
+                        "location": "living room"
+                    }
+                ],
+                "interactables": [
+                    "tv",
+                    "cup",
+                    "lights",
+                    "chair"
+                ],
+                "tv": {
+                    "status": "on"
+                },
+                "lights": {
+                    "status": "off"
+                }
+            },
+            {
+                "name": "kitchen",
+                "occupants": [],
+                "interactables": [
+                    "fridge",
+                    "plate",
+                    "cup",
+                    "mug",
+                    "utensils",
+                    "microwave",
+                    "oven",
+                    "sink",
+                    "lights"
+                ],
+                "oven": {
+                    "status": "off"
+                },
+                "microwave": {
+                    "status": "off"
+                },
+                "lights": {
+                    "status": "off"
+                },
+                "fridge": {
+                    "status": "on",
+                    "food": [
+                        "milk",
+                        "eggs",
+                        "bread"
+                    ]
+                }
+            },
+            {
+                "name": "bedroom",
+                "occupants": [
+                    {
+                        "name": "Sarah",
+                        "location": "bedroom"
+                    }
+                ],
+                "interactables": [
+                    "lights"
+                ],
+                "lights": {
+                    "status": "off"
+                }
+            }
+        ]
+    }
+}

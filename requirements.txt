@@ -1,6 +1,7 @@
 # will be updated with the addition of packages
 pyaudio
 SpeechRecognition
+openai
 streamlit
 google-cloud-speech
 google-cloud-aiplatform
