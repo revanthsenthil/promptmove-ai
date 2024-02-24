@@ -19,7 +19,7 @@ cd promptmove-ai
 git submodule update --init --recursive
 ```
 
-The current version of promptmove-ai has been tested on Unity Simulator for Windows, and it should be downloadable from [this link] (http://virtual-home.org//release/simulator/last_release/windows_exec.zip).
+The current version of promptmove-ai has been tested on Unity Simulator for Windows, and it should be downloadable from [http://virtual-home.org//release/simulator/last_release/windows_exec.zip].
 
 Once you extract the directory, move the directory titled `windows_execv2.2.4` to `promptmove-ai/virtualhome/virtualhome/simulation`. To test that it's installed with no issues, navigate into that directory and open the Unity Simulator file `VirtualHome`. It should open a blank full screen Unity Simulator window.
 
