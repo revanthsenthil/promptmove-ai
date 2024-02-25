@@ -2,16 +2,18 @@ from  openai import OpenAI
 from src.audio.MicrophoneStream import MicrophoneStream
 import pyaudio
 import wave
+import os
 
 def transcribe_speech(audio_file):
     client = OpenAI()
 
-    audio_file = open(audio_file, "rb")
-    transcript = client.audio.transcriptions.create(
-        model="whisper-1", 
-        file=audio_file, 
-        response_format="text"
-    )
+    with open(audio_file, "rb") as f:
+        transcript = client.audio.transcriptions.create(
+            model="whisper-1", 
+            file=f, 
+            response_format="text"
+        )
+    os.remove(audio_file)
     return transcript
 
 
@@ -41,8 +43,6 @@ def record_5_sec():
     return WAVE_OUTPUT_FILENAME
 
 if __name__ == "__main__":
-    import os
     file = record_5_sec()
     transcript = transcribe_speech(file)
-    os.remove(file)
     print(transcript)
