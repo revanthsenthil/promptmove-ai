@@ -1,6 +1,5 @@
 from  openai import OpenAI
 from src.audio.MicrophoneStream import MicrophoneStream
-import pyaudio
 import wave
 import os
 
@@ -19,7 +18,6 @@ def transcribe_speech(audio_file):
 
 def record_5_sec():
     CHUNK = 1024
-    FORMAT = pyaudio.paInt16
     CHANNELS = 1
     RATE = 16000
     WAVE_OUTPUT_FILENAME = "speech.wav"
