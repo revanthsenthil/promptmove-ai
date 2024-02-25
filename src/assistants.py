@@ -2,11 +2,16 @@
 FUNCTION CALLING EXAMPLES
 https://platform.openai.com/docs/assistants/tools/function-calling
 
+App inspired by blogpost: https://blog.streamlit.io/how-to-build-an-llm-powered-chatbot-with-streamlit/
 """
+
 from openai import OpenAI
 import streamlit as st
 
 import src.audio.transcribe as transcribe
+
+import os
+p = os.path.abspath("../config")
 
 def create_assistant():
 
@@ -15,12 +20,12 @@ def create_assistant():
 
     # Upload files with an "assistants" purpose
     house_info_file = client.files.create(
-        file=open("house_information.json", "rb"),
+        file=open(p +'/house_information.json', "rb"),
         purpose='assistants'
     )
 
     example_functions = client.files.create(
-        file=open("example_virtualhome_functions.py", "rb"),
+        file=open(p + '/example_virtualhome_functions.py', "rb"),
         purpose='assistants'
     )
 
@@ -72,6 +77,20 @@ def generate_response(user_input):
 
     return messages.data[0].content[0].text.value
 
+def credentials():
+    st.title('Credentials')
+    if 'KEY' in st.secrets:
+        st.success('OpenAI API Key already provided!', icon='✅')
+        openai_key = st.secrets['KEY']
+    else:
+        openai_key = st.text_input('Enter OpenAI API Key:', type='password')
+        if not openai_key:
+            st.warning('Please enter your OpenAI API Key!', icon='⚠️')
+        else:
+            st.success('Thank You!', icon='✅')
+    st.markdown('[GitHub repo](https://github.com/revanthsenthil/promptmove-ai)')
+    return openai_key
+
 def click_button():
     st.session_state.clicked = True
 
@@ -82,9 +101,10 @@ def main():
     st.title(":blue[PromptMove-AI]")
     st.write("This is a virtual assistant to help with tasks around the house, such as \
             cooking, cleaning, retrieving items, and general assistance.")	
-     
-    with st.sidebar:
-        st.title('Credentials')
+    
+    # Set up siebar for OpenAI API key
+    # with st.sidebar:
+    #    key = credentials()
 
     if 'clicked' not in st.session_state:
         st.session_state.clicked = False
