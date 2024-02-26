@@ -6,17 +6,25 @@ App inspired by blogpost: https://blog.streamlit.io/how-to-build-an-llm-powered-
 """
 
 from openai import OpenAI
+import openai
 import streamlit as st
 
 import src.audio.transcribe as transcribe
 
+import configparser
 import os
 p = os.path.abspath("../config")
 
 def create_assistant():
 
     # gets the environment variable OPENAI_API_KEY
-    client = OpenAI()
+    try:
+        client = OpenAI()
+    except openai.OpenAIError:
+        config = configparser.ConfigParser()
+        config.read('../.env')
+        key = config['KEYS']['OPENAI_API_KEY']
+        client = OpenAI(api_key=key)
 
     # Upload files with an "assistants" purpose
     house_info_file = client.files.create(
