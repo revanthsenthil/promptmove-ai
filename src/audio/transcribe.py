@@ -1,4 +1,5 @@
-from  openai import OpenAI
+from openai import OpenAI
+import openai
 from src.audio.MicrophoneStream import MicrophoneStream
 import wave
 import os
@@ -7,7 +8,7 @@ import configparser
 def transcribe_speech(audio_file):
     try:
         client = OpenAI()
-    except:
+    except openai.OpenAIError:
         config = configparser.ConfigParser()
         config.read('../.env')
         key = config['KEYS']['OPENAI_API_KEY']
