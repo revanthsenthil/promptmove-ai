@@ -2,9 +2,16 @@ from  openai import OpenAI
 from src.audio.MicrophoneStream import MicrophoneStream
 import wave
 import os
+import configparser
 
 def transcribe_speech(audio_file):
-    client = OpenAI()
+    try:
+        client = OpenAI()
+    except:
+        config = configparser.ConfigParser()
+        config.read('../.env')
+        key = config['KEYS']['OPENAI_API_KEY']
+        client = OpenAI(api_key=key)
 
     with open(audio_file, "rb") as f:
         transcript = client.audio.transcriptions.create(
