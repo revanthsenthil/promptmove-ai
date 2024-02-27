@@ -13,6 +13,8 @@ import src.audio.transcribe as transcribe
 
 import configparser
 import os
+import re
+
 p = os.path.abspath("../config")
 
 def create_assistant():
@@ -39,8 +41,8 @@ def create_assistant():
 
     # Add the files to the assistant
     assistant = client.beta.assistants.create(
-        instructions="You are a personal house assistant. Write and run virtualhome simulator code \
-        to help with tasks around the house, such as cooking, cleaning, organizing, and retrieving items.",
+        instructions="You are a personal house assistant for assisting in the VirtualHome simulated environment \
+        to help with tasks around the house, such as cooking, cleaning, organizing, retrieving items, and general knowledge about the state of the house.",
         model="gpt-3.5-turbo-0125",
         tools=[{"type": "retrieval"}],
         file_ids=[house_info_file.id, example_functions.id]
@@ -83,7 +85,7 @@ def generate_response(user_input):
     # List the messages associated with the thread
     messages = client.beta.threads.messages.list(thread_id=thread.id)
 
-    return messages.data[0].content[0].text.value
+    return remove_brackets(messages.data[0].content[0].text.value)
 
 def credentials():
     st.title('Credentials')
@@ -101,6 +103,10 @@ def credentials():
 
 def click_button():
     st.session_state.clicked = True
+
+def remove_brackets(text):
+    pattern = r'【.*?】'  # Matches text between "【" and "】" non-greedily
+    return re.sub(pattern, '', text)
 
 def main():
 
@@ -159,7 +165,6 @@ def main():
 
     # Display button
     st.button(":studio_microphone:", help="Click to use microphone", type='primary', use_container_width=True, on_click=click_button)
-    
 
 
 if __name__ == "__main__":		
