@@ -57,4 +57,23 @@ In the `virtualhome_test.py` script inside of `promptmove-ai/scripts`, change `f
 
 Run `virtualhome_test.py`. This should run a simple simulated motion on the simulator and generate a stream of images as output to a newly created directory inside `virtualhome/virtualhome/Output/`.
 
-If these images are generated, the installation was successful.
+If these images are generated, the virtualhome installation was successful.
+
+Additionally, the the promptmove-ai directory, you may run our tests to ensure promptmove-ai was setup and installed correctly. You must have pytest installed.
+```bash
+pytest tests
+```
+
+### Running PromptMove-AI
+
+You must have an OpenAI API key to utilize promptmove-ai. It can be set as an environment variable called `OPENAI_API_KEY`.
+
+Navigate to the `/src` directory and run the assistants.py streamlit app.
+```bash
+cd src
+streamlit run assistants.py
+```
+
+This should open a new window in your browser to interact with the promptmove-ai user interface.
+
+View the [User Manual](https://github.com/revanthsenthil/promptmove-ai/blob/main/docs/USERMANUAL.md) for further instruction.
