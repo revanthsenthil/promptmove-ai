@@ -6,6 +6,9 @@ This project was created as a collaborative effort between Revanth Krishna Senth
 
 User Manual: https://github.com/revanthsenthil/promptmove-ai/blob/main/docs/USERMANUAL.md
 
+Example virtualhome video generation
+![]( https://github.com/revanthsenthil/promptmove-ai/blob/main/docs/assets/video_normal.gif)
+
 ## Setup and Installation
 
 Make sure your environment is set up correctly with python 3.9
