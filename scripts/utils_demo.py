@@ -3,7 +3,6 @@ import numpy as np
 import io
 import os
 import base64
-import IPython
 from sys import platform
 from IPython.core.display import HTML
 
@@ -11,7 +10,6 @@ import sys
 
 sys.path.append('../simulation')
 from virtualhome.simulation.unity_simulator.comm_unity import UnityCommunication
-from virtualhome.simulation.unity_simulator import utils_viz
 
 comm = UnityCommunication()
 
