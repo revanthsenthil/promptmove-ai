@@ -1,10 +1,12 @@
 # promptmove-ai
 
-Last updated 02/22/2024.
+Last updated 04/12/2024.
 
 This project was created as a collaborative effort between Revanth Krishna Senthilkumaran, Calvin Madsen and Usman Chaudhary. 
 
-### Setup and Installation
+User Manual: https://github.com/revanthsenthil/promptmove-ai/blob/main/docs/USERMANUAL.md
+
+## Setup and Installation
 
 Make sure your environment is set up correctly with python 3.9
 ```bash
@@ -42,14 +44,17 @@ pip install -e .
 
 The current version of promptmove-ai has been tested on Unity Simulator for Linux and Windows 
 
-### Windows
+## Windows
 Download the executable from [http://virtual-home.org//release/simulator/last_release/windows_exec.zip].
-
-Once you extract the directory, move the directory titled `windows_execv2.2.4` to `promptmove-ai/virtualhome/virtualhome/simulation`. To test that it's installed with no issues, navigate into that directory and open the Unity Simulator file `VirtualHome`. It should open a blank full screen Unity Simulator window.
-
-Run the `test.py` script inside of `promptmove-ai/scripts`. This should run a simple simulated motion on the simulator and generate a stream of images as output to a newly created directory inside `virtualhome/virtualhome/Output/`.
 
 ### Linux
 Download the executable from [http://virtual-home.org//release/simulator/last_release/linux_exec.zip]
 
-Run the `virtualhome_test.py` script inside of `promptmove-ai/scripts`. This should run a simple simulated motion on the simulator and generate a stream of images as output to a newly created directory inside `virtualhome/virtualhome/Output/`.
+### Testing
+Once downloaded, extract the executable into the `virtualhome/simulation` directory. 
+
+In the `virtualhome_test.py` script inside of `promptmove-ai/scripts`, change `file_name` to the path of your saved executable. 
+
+Run `virtualhome_test.py`. This should run a simple simulated motion on the simulator and generate a stream of images as output to a newly created directory inside `virtualhome/virtualhome/Output/`.
+
+If these images are generated, the installation was successful.
