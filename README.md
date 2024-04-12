@@ -52,4 +52,4 @@ Run the `test.py` script inside of `promptmove-ai/scripts`. This should run a si
 ### Linux
 Download the executable from [http://virtual-home.org//release/simulator/last_release/linux_exec.zip]
 
-Run the `test.py` script inside of `promptmove-ai/scripts`. This should run a simple simulated motion on the simulator and generate a stream of images as output to a newly created directory inside `virtualhome/virtualhome/Output/`.
+Run the `virtualhome_test.py` script inside of `promptmove-ai/scripts`. This should run a simple simulated motion on the simulator and generate a stream of images as output to a newly created directory inside `virtualhome/virtualhome/Output/`.
