@@ -4,7 +4,8 @@ from virtualhome.simulation.unity_simulator import utils_viz
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-from utils_demo import *
+from utils_demo import get_scene_cameras,display_scene_cameras,display_grid_img,find_nodes,add_node,add_edge
+
 
 file_name = "../virtualhome/virtualhome/simulation/linux_exec/linux_exec.v2.3.0.x86_64" # path to executable
 
@@ -18,9 +19,6 @@ for scene_id in tqdm(range(10)):
     comm.remove_terrain()
     top_view = get_scene_cameras(comm, [-1])
     views += top_view
-plt.imshow(np.concatenate(views, axis=1))
-plt.axis('off')
-plt.show()
 
 comm.reset(0)
 
