@@ -37,15 +37,6 @@ def find_edges_from(graph, id):
     nb_list = [(e['relation_type'], e['to_id']) for e in graph['edges'] if e['from_id'] == id]
     return [(rel, find_nodes(graph, id=n_id)[0]) for (rel, n_id) in nb_list]
 
-def clean_graph(graph):
-    new_nodes = []
-    for n in graph['nodes']:
-        nc = dict(n)
-        if 'bounding_box' in nc:
-            del nc['bounding_box']
-        new_nodes.append(nc)
-    return {'nodes': new_nodes, 'edges': list(graph['edges'])}
-
 def remove_edges(graph, n, fr=True, to=True):
     n_id = n['id']
     new_edges = [e for e in graph['edges'] if 
@@ -88,7 +79,7 @@ def remove_sofa(graph):
 
 def open_fridge(graph):
 
-    graph1 = add_beer(graph)
+    _ = add_beer(graph)
     graph_1 = clean_graph(graph)
     fridge = find_nodes(graph_1, class_name='fridge')[0]
     fridge['states'] = ['OPEN']

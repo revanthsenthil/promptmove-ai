@@ -49,7 +49,7 @@ plt.imshow(display_grid_img(imgs_prev, nrows=1))
 plt.axis('off')
 plt.show()
 
-success, graph = comm.environment_graph();
+success, graph = comm.environment_graph()
 sofa = find_nodes(graph, class_name='sofa')[-2]
 print(sofa)
 
