@@ -2,4 +2,5 @@
 pyaudio
 openai
 streamlit
-google-cloud-speech
+virtualhome
+pytest
