@@ -10,6 +10,7 @@ import openai
 import streamlit as st
 
 import src.audio.transcribe as transcribe
+from src.functions import get_current_weather, move_to_object
 
 import os
 import re
@@ -17,18 +18,6 @@ import json
 
 p = os.path.abspath("../config")
 
-def get_current_weather(location, unit="fahrenheit"):
-    """Get the current weather in a given location"""
-    print(f"Running get_current_weather({location})")
-
-    if "tokyo" in location.lower():
-        return json.dumps({"location": "Tokyo", "temperature": "10", "unit": unit})
-    elif "san francisco" in location.lower():
-        return json.dumps({"location": "San Francisco", "temperature": "72", "unit": unit})
-    elif "paris" in location.lower():
-        return json.dumps({"location": "Paris", "temperature": "22", "unit": unit})
-    else:
-        return json.dumps({"location": location, "temperature": "unknown"})
 def create_assistant():
 
     # gets the environment variable OPENAI_API_KEY
@@ -62,6 +51,27 @@ def create_assistant():
                                 "unit": {"type": "string", "enum": ["fahrenheit", "celsius"]},
                             },
                             "required": ["location"],
+                        },
+                    },
+                },
+                {
+                "type": "function",
+                    "function": {
+                        "name": "move_to_object",
+                        "description": "Walk to an object or location in the house",
+                        "parameters": {
+                            "type": "object",
+                            "properties": {
+                                "action": {
+                                    "type": "string",
+                                    "description": "the string 'walk' to represent walking towards object or location",
+                                },
+                                "object": {
+                                    "type": "string", 
+                                    "description": "the object or location to walk to",
+                                },
+                            },
+                            "required": ["object"],
                         },
                     },
                 }
@@ -104,6 +114,12 @@ def generate_response(user_input):
     # load session's assistant
     client, assistant, thread = st.session_state.assistant
 
+    _ = client.beta.threads.messages.create(
+        thread_id=thread.id,
+        role="user",
+        content=user_input,
+    )
+
     print(f"\nRunning generate_response({user_input})")
 
     run = client.beta.threads.runs.create_and_poll(
@@ -131,16 +147,14 @@ def generate_response(user_input):
     if tool_calls:
         available_functions = {
             "get_current_weather": get_current_weather,
+            'move_to_object': move_to_object
         }
         for tool_call in tool_calls:
             function_name = tool_call.function.name
             function_to_call = available_functions[function_name]
             function_args = json.loads(tool_call.function.arguments)
             print(f'Function args: {function_args}')
-            function_response = function_to_call(
-                location=function_args.get("location"),
-                unit=function_args.get("unit"),
-            )
+            function_response = function_to_call(**function_args)
             tool_outputs.append(
                 {
                     "tool_call_id": tool_call.id,
@@ -181,7 +195,7 @@ def generate_response(user_input):
 
     else:
         # No tool outputs
-
+        print('\nTHIS CODE RUNS\n')
         # create a message associated with the thread
         client.beta.threads.messages.create(
             thread_id=thread.id,
@@ -207,53 +221,6 @@ def generate_response(user_input):
         messages = client.beta.threads.messages.list(thread_id=thread.id)
 
         return remove_brackets(messages.data[0].content[0].text.value)
-            
-    """
-    response = client.chat.completions.create(
-        model="gpt-4-turbo",
-        messages=messages,
-        tools=tools,
-        tool_choice="auto",  # auto is default, but we'll be explicit
-    )
-    response_message = response.choices[0].message
-    print("\nInitial response:", response_message)
-
-    tool_calls = response_message.tool_calls
-    print("\nTool calls:", tool_calls)
-
-    if tool_calls:
-        available_functions = {
-            "get_current_weather": get_current_weather,
-        } # only one function in this example, but you can have multiple
-        messages.append(response_message)  # extend conversation with assistant's reply
-        print("\nInitial messages appended with response:", messages)
-
-        # Step 4: send the info for each function call and function response to the model
-        for tool_call in tool_calls:
-            function_name = tool_call.function.name
-            function_to_call = available_functions[function_name]
-            function_args = json.loads(tool_call.function.arguments)
-            function_response = function_to_call(
-                location=function_args.get("location"),
-                unit=function_args.get("unit"),
-            )
-            messages.append(
-                {
-                    "tool_call_id": tool_call.id,
-                    "role": "tool",
-                    "name": function_name,
-                    "content": function_response,
-                }
-            )  # extend conversation with function response
-            print("\nMessages appended with function response:", messages)
-
-        second_response = client.chat.completions.create(
-            model="gpt-4-turbo",
-            messages=messages,
-        )
-        return second_response"""
-    
-
 
 def click_button():
     st.session_state.clicked = True
