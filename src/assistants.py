@@ -11,7 +11,6 @@ import streamlit as st
 
 import src.audio.transcribe as transcribe
 
-import configparser
 import os
 import re
 
@@ -21,31 +20,41 @@ def create_assistant():
 
     # gets the environment variable OPENAI_API_KEY
     try:
-        client = OpenAI()
+        client = OpenAI(api_key=st.session_state.openai_key)
     except openai.OpenAIError:
-        config = configparser.ConfigParser()
-        config.read('../.env')
-        key = config['KEYS']['OPENAI_API_KEY']
-        client = OpenAI(api_key=key)
-
-    # Upload files with an "assistants" purpose
-    house_info_file = client.files.create(
-        file=open(p +'/house_information.json', "rb"),
-        purpose='assistants'
-    )
-
-    example_functions = client.files.create(
-        file=open(p + '/example_virtualhome_functions.py', "rb"),
-        purpose='assistants'
-    )
+        st.error("Error creating assistant. Please check your credentials.")
+        return None
 
     # Add the files to the assistant
-    assistant = client.beta.assistants.create(
-        instructions="You are a personal house assistant for assisting in the VirtualHome simulated environment \
-        to help with tasks around the house, such as cooking, cleaning, organizing, retrieving items, and general knowledge about the state of the house.",
-        model="gpt-3.5-turbo-0125",
-        tools=[{"type": "retrieval"}],
-        file_ids=[house_info_file.id, example_functions.id]
+    try:
+        assistant = client.beta.assistants.create(
+            instructions="You are a personal house assistant for assisting in the VirtualHome simulated environment \
+            to help with tasks around the house, such as cooking, cleaning, organizing, retrieving items, and general knowledge about the state of the house.",
+            model="gpt-4-turbo",
+            tools=[{"type": "file_search"}]
+        )
+    except openai.OpenAIError:
+        st.error("Error creating assistant. Please check your credentials.")
+        return None
+    
+    # Create a vector store
+    vector_store = client.beta.vector_stores.create(name="Simulated House Information")
+    
+    # Ready the files for upload to OpenAI 
+    file_paths = [p +'/house_information.json', p + '/example_virtualhome_functions.py']
+    file_streams = [open(path, "rb") for path in file_paths]
+    
+    # Use the upload and poll SDK helper to upload the files, add them to the vector store,
+    # and poll the status of the file batch for completion.
+    _ = client.beta.vector_stores.file_batches.upload_and_poll(
+        vector_store_id = vector_store.id, 
+        files = file_streams
+    )
+
+    # update assistant to use new vector store
+    assistant = client.beta.assistants.update(
+        assistant_id = assistant.id,
+        tool_resources = {"file_search": {"vector_store_ids": [vector_store.id]}},
     )
 
     # Create one thread per user
@@ -87,19 +96,6 @@ def generate_response(user_input):
 
     return remove_brackets(messages.data[0].content[0].text.value)
 
-def credentials():
-    st.title('Credentials')
-    if 'KEY' in st.secrets:
-        st.success('OpenAI API Key already provided!', icon='✅')
-        openai_key = st.secrets['KEY']
-    else:
-        openai_key = st.text_input('Enter OpenAI API Key:', type='password')
-        if not openai_key:
-            st.warning('Please enter your OpenAI API Key!', icon='⚠️')
-        else:
-            st.success('Thank You!', icon='✅')
-    st.markdown('[GitHub repo](https://github.com/revanthsenthil/promptmove-ai)')
-    return openai_key
 
 def click_button():
     st.session_state.clicked = True
@@ -107,6 +103,22 @@ def click_button():
 def remove_brackets(text):
     pattern = r'【.*?】'  # Matches text between "【" and "】" non-greedily
     return re.sub(pattern, '', text)
+
+def check_key():
+    try:
+        client = OpenAI(api_key=st.session_state.openai_key)
+    except Exception:
+        st.session_state.correct_key = False
+    try:
+        _ = client.beta.assistants.create(
+            instructions="You are a personal house assistant for assisting in the VirtualHome simulated environment \
+            to help with tasks around the house, such as cooking, cleaning, organizing, retrieving items, and general knowledge about the state of the house.",
+            model="gpt-4-turbo",
+            tools=[{"type": "file_search"}]
+        )
+        st.session_state.correct_key = True
+    except Exception:
+        st.session_state.correct_key = False
 
 def main():
 
@@ -116,14 +128,42 @@ def main():
     st.write("This is a virtual assistant to help with tasks around the house, such as \
             cooking, cleaning, retrieving items, and general assistance.")	
     
-    # Set up siebar for OpenAI API key
-    # with st.sidebar:
-    #    key = credentials()
+    # Set up sidebar for OpenAI API key credentials
+    with st.sidebar:
+        st.title('Credentials')
+
+        # if key is already provided 
+        if 'openai_key' in st.session_state.keys():
+            check_key()
+            if st.session_state.correct_key:
+                st.success('OpenAI API Key Already Accepted!', icon='✅')
+            else:
+                st.session_state.openai_key = st.text_input('Enter OpenAI API Key:', type='password')
+                check_key()
+
+        # if key is provided in environment variables
+        elif 'OPENAI_API_KEY' in os.environ:
+            st.session_state.openai_key = os.environ['OPENAI_API_KEY']
+            check_key()
+            if st.session_state.correct_key:
+                st.success('OpenAI API Key Accepted!', icon='✅')
+            else:
+                st.session_state.openai_key = st.text_input('Enter OpenAI API Key:', type='password')
+                check_key()
+        else:
+            st.warning('Please enter your OpenAI API Key!', icon='⚠️')
+            st.session_state.openai_key = st.text_input('Enter OpenAI API Key:', type='password')
+            check_key()
+
+        st.markdown('[GitHub repo](https://github.com/revanthsenthil/promptmove-ai)')
+
+    if not st.session_state.correct_key:
+        return
 
     if 'clicked' not in st.session_state:
         st.session_state.clicked = False
 
-    # get assistant if not already created
+    # Get assistant if not already created
     if "assistant" not in st.session_state.keys():
         client, assistant, thread = create_assistant()
         assistant_info = client, assistant, thread
@@ -132,7 +172,6 @@ def main():
     # Store LLM generated responses
     if "messages" not in st.session_state.keys():
         st.session_state.messages = [{"role": "assistant", "content": "How may I help you?"}]
-
 
     # Display chat messages
     for message in st.session_state.messages:
@@ -160,6 +199,7 @@ def main():
             with st.spinner("Thinking..."):
                 response = generate_response(user_input) 
                 st.write(response) 
+                # st.video('video_normal.mp4', format="video/mp4", start_time=0, subtitles=None, end_time=None, loop=False)
         message = {"role": "assistant", "content": response}
         st.session_state.messages.append(message)
 
@@ -170,5 +210,7 @@ def main():
 if __name__ == "__main__":		
 
     # run the app
+    # streamlit run assistants.py
+
     main()
 
