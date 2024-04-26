@@ -11,7 +11,6 @@ import streamlit as st
 
 import src.audio.transcribe as transcribe
 
-import configparser
 import os
 import re
 
@@ -47,7 +46,7 @@ def create_assistant():
     
     # Use the upload and poll SDK helper to upload the files, add them to the vector store,
     # and poll the status of the file batch for completion.
-    file_batch = client.beta.vector_stores.file_batches.upload_and_poll(
+    _ = client.beta.vector_stores.file_batches.upload_and_poll(
         vector_store_id = vector_store.id, 
         files = file_streams
     )
@@ -111,7 +110,7 @@ def check_key():
     except Exception:
         st.session_state.correct_key = False
     try:
-        assistant = client.beta.assistants.create(
+        _ = client.beta.assistants.create(
             instructions="You are a personal house assistant for assisting in the VirtualHome simulated environment \
             to help with tasks around the house, such as cooking, cleaning, organizing, retrieving items, and general knowledge about the state of the house.",
             model="gpt-4-turbo",
@@ -158,7 +157,7 @@ def main():
 
         st.markdown('[GitHub repo](https://github.com/revanthsenthil/promptmove-ai)')
 
-    if st.session_state.correct_key == False:
+    if not st.session_state.correct_key:
         return
 
     if 'clicked' not in st.session_state:
