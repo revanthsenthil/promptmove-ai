@@ -10,7 +10,7 @@ import openai
 import streamlit as st
 
 import src.audio.transcribe as transcribe
-from src.functions import get_current_weather, move_to_object
+from src.functions import get_current_weather, perform_action_on_object, run_script
 
 import os
 import re
@@ -147,7 +147,7 @@ def generate_response(user_input):
     if tool_calls:
         available_functions = {
             "get_current_weather": get_current_weather,
-            'move_to_object': move_to_object
+            'perform_action_on_object': perform_action_on_object
         }
         for tool_call in tool_calls:
             function_name = tool_call.function.name
@@ -163,6 +163,7 @@ def generate_response(user_input):
                     "output": function_response,
                 }
             )
+        run_script()
     else:
         # No tool calls
         print("No tool calls.")

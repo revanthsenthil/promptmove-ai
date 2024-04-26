@@ -1,6 +1,9 @@
 
 import json
 
+ACTIONS = []
+OBJECTS = []
+
 def get_current_weather(location, unit="fahrenheit"):
     """Get the current weather in a given location"""
     print(f"Running get_current_weather({location})")
@@ -14,10 +17,16 @@ def get_current_weather(location, unit="fahrenheit"):
     else:
         return json.dumps({"location": location, "temperature": "unknown"})
     
-def move_to_object(object, action="walk"):
-    """Move to an object in the scene"""
-    print(f"Running move_to_object({action}, {object})")
-    #return json.dumps({"action": action, "object": object})
+def perform_action_on_object(action, object):
+    """Perform an action on an object in a virtual home environment"""
+    print(f"Running perform_action_on_object({action}, {object})")
+    ACTIONS.append(action)
+    OBJECTS.append(object)
+    return json.dumps({"action": action, "object": object})
+
+def run_script():
+    """Run the scrupt for performing actions on objects in a virtual home environment"""
+    print(f"Running run_script({ACTIONS}, {OBJECTS})")
 
     from virtualhome.simulation.unity_simulator import UnityCommunication
     from virtualhome.simulation.unity_simulator import utils_viz
@@ -30,22 +39,15 @@ def move_to_object(object, action="walk"):
     from scripts.utils_demo import get_scene_cameras,display_scene_cameras,display_grid_img,find_nodes,add_node,add_edge
 
 
-    file_name = "../src/linux_exec.v2.3.0.x86_64" # path to executable
+    file_name = "../scripts/windows_exec.v2.3.0\VirtualHome.exe" # path to executable
 
-    comm = UnityCommunication(file_name=file_name, port="8082", x_display="1", timeout_wait=120)
+    comm = UnityCommunication(file_name=file_name, port="8081", timeout_wait=120)
 
     # Generating Scripts
 
     comm.reset(4)
     comm.add_character('chars/Female2', initial_room='kitchen')
     s, g = comm.environment_graph()
-
-    # need to change to input from LLM
-    #OBJECTS = ['sofa', 'sofa', 'computer', 'computer']
-    #ACTIONS = ['walk', 'sit', 'find', 'walk']
-    OBJECTS = [object]
-    ACTIONS = [action]
-
 
     script = []
     
@@ -83,4 +85,4 @@ def move_to_object(object, action="walk"):
     path_video = f"./Output"
     utils_viz.generate_video(input_path=path_video, prefix='relax', output_path='.')
 
-    return json.dumps({"action": action, "object": object})
+    return json.dumps({"actions": ACTIONS, "object": OBJECTS})
