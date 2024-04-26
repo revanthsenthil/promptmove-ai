@@ -13,16 +13,29 @@ import src.audio.transcribe as transcribe
 
 import os
 import re
+import json
 
 p = os.path.abspath("../config")
 
+def get_current_weather(location, unit="fahrenheit"):
+    """Get the current weather in a given location"""
+    print(f"Running get_current_weather({location})")
+
+    if "tokyo" in location.lower():
+        return json.dumps({"location": "Tokyo", "temperature": "10", "unit": unit})
+    elif "san francisco" in location.lower():
+        return json.dumps({"location": "San Francisco", "temperature": "72", "unit": unit})
+    elif "paris" in location.lower():
+        return json.dumps({"location": "Paris", "temperature": "22", "unit": unit})
+    else:
+        return json.dumps({"location": location, "temperature": "unknown"})
 def create_assistant():
 
     # gets the environment variable OPENAI_API_KEY
     try:
         client = OpenAI(api_key=st.session_state.openai_key)
     except openai.OpenAIError:
-        st.error("Error creating assistant. Please check your credentials.")
+        st.error("Error creating client instance. Please check your credentials.")
         return None
 
     # Add the files to the assistant
@@ -31,7 +44,28 @@ def create_assistant():
             instructions="You are a personal house assistant for assisting in the VirtualHome simulated environment \
             to help with tasks around the house, such as cooking, cleaning, organizing, retrieving items, and general knowledge about the state of the house.",
             model="gpt-4-turbo",
-            tools=[{"type": "file_search"}]
+            tools=
+            [
+                {"type": "file_search"},
+                {
+                "type": "function",
+                    "function": {
+                        "name": "get_current_weather",
+                        "description": "Get the current weather in a given location",
+                        "parameters": {
+                            "type": "object",
+                            "properties": {
+                                "location": {
+                                    "type": "string",
+                                    "description": "The city and state, e.g. San Francisco, CA",
+                                },
+                                "unit": {"type": "string", "enum": ["fahrenheit", "celsius"]},
+                            },
+                            "required": ["location"],
+                        },
+                    },
+                }
+            ]
         )
     except openai.OpenAIError:
         st.error("Error creating assistant. Please check your credentials.")
@@ -41,7 +75,7 @@ def create_assistant():
     vector_store = client.beta.vector_stores.create(name="Simulated House Information")
     
     # Ready the files for upload to OpenAI 
-    file_paths = [p +'/house_information.json', p + '/example_virtualhome_functions.py']
+    file_paths = [p +'/house_information.json']
     file_streams = [open(path, "rb") for path in file_paths]
     
     # Use the upload and poll SDK helper to upload the files, add them to the vector store,
@@ -70,31 +104,155 @@ def generate_response(user_input):
     # load session's assistant
     client, assistant, thread = st.session_state.assistant
 
-    # create a message associated with the thread
-    client.beta.threads.messages.create(
+    print(f"\nRunning generate_response({user_input})")
+
+    run = client.beta.threads.runs.create_and_poll(
         thread_id=thread.id,
-        role="user",
-        content=user_input
+        assistant_id=assistant.id,
     )
 
-    # create a run associated with the thread
-    run = client.beta.threads.runs.create(
-        thread_id=thread.id,
-        assistant_id=assistant.id
+    if run.status == 'completed':
+        # No tool calls
+        messages = client.beta.threads.messages.list(
+            thread_id=thread.id
+        )
+        print(messages)
+        return messages.data[0].content[0].text.value
+    else:
+        print(run.status)
+
+    # Define the list to store tool outputs
+    tool_outputs = []
+
+    # Loop through each tool in the required action section
+    tool_calls = run.required_action.submit_tool_outputs.tool_calls
+    print('Tool calls:', tool_calls)
+
+    if tool_calls:
+        available_functions = {
+            "get_current_weather": get_current_weather,
+        }
+        for tool_call in tool_calls:
+            function_name = tool_call.function.name
+            function_to_call = available_functions[function_name]
+            function_args = json.loads(tool_call.function.arguments)
+            print(f'Function args: {function_args}')
+            function_response = function_to_call(
+                location=function_args.get("location"),
+                unit=function_args.get("unit"),
+            )
+            tool_outputs.append(
+                {
+                    "tool_call_id": tool_call.id,
+                    #"role": "tool",
+                    #"name": function_name,
+                    "output": function_response,
+                }
+            )
+    else:
+        # No tool calls
+        print("No tool calls.")
+        return messages.data[0].content[0].text.value
+
+
+    # Submit all tool outputs at once after collecting them in a list
+    if tool_outputs:
+        try:
+            run = client.beta.threads.runs.submit_tool_outputs_and_poll(
+                thread_id=thread.id,
+                run_id=run.id,
+                tool_outputs=tool_outputs
+            )
+            print("Tool outputs submitted successfully.")
+        except Exception as e:
+            print("Failed to submit tool outputs:", e)
+        else:
+            print("No tool outputs to submit.")
+
+        if run.status == 'completed':
+            messages = client.beta.threads.messages.list(
+                thread_id=thread.id
+            )
+            print(messages)
+        else:
+            print(run.status)
+        
+        return messages.data[0].content[0].text.value
+
+    else:
+        # No tool outputs
+
+        # create a message associated with the thread
+        client.beta.threads.messages.create(
+            thread_id=thread.id,
+            role="user",
+            content=user_input
+        )
+
+        # create a run associated with the thread
+        run = client.beta.threads.runs.create(
+            thread_id=thread.id,
+            assistant_id=assistant.id
+        )
+
+        # Wait for run to complete
+        while run.status != "completed":
+            run = client.beta.threads.runs.retrieve(thread_id=thread.id, run_id=run.id)
+            if run.status in ["failed", "cancelled", "cancelling", "expired"]:
+                return f"Error: {run.status}"
+            if run.status == "requires_action":
+                return "Assistant requires action"
+
+        # List the messages associated with the thread
+        messages = client.beta.threads.messages.list(thread_id=thread.id)
+
+        return remove_brackets(messages.data[0].content[0].text.value)
+            
+    """
+    response = client.chat.completions.create(
+        model="gpt-4-turbo",
+        messages=messages,
+        tools=tools,
+        tool_choice="auto",  # auto is default, but we'll be explicit
     )
+    response_message = response.choices[0].message
+    print("\nInitial response:", response_message)
 
-    # Wait for run to complete
-    while run.status != "completed":
-        run = client.beta.threads.runs.retrieve(thread_id=thread.id, run_id=run.id)
-        if run.status in ["failed", "cancelled", "cancelling", "expired"]:
-            return f"Error: {run.status}"
-        if run.status == "requires_action":
-            return "Assistant requires action"
+    tool_calls = response_message.tool_calls
+    print("\nTool calls:", tool_calls)
 
-    # List the messages associated with the thread
-    messages = client.beta.threads.messages.list(thread_id=thread.id)
+    if tool_calls:
+        available_functions = {
+            "get_current_weather": get_current_weather,
+        } # only one function in this example, but you can have multiple
+        messages.append(response_message)  # extend conversation with assistant's reply
+        print("\nInitial messages appended with response:", messages)
 
-    return remove_brackets(messages.data[0].content[0].text.value)
+        # Step 4: send the info for each function call and function response to the model
+        for tool_call in tool_calls:
+            function_name = tool_call.function.name
+            function_to_call = available_functions[function_name]
+            function_args = json.loads(tool_call.function.arguments)
+            function_response = function_to_call(
+                location=function_args.get("location"),
+                unit=function_args.get("unit"),
+            )
+            messages.append(
+                {
+                    "tool_call_id": tool_call.id,
+                    "role": "tool",
+                    "name": function_name,
+                    "content": function_response,
+                }
+            )  # extend conversation with function response
+            print("\nMessages appended with function response:", messages)
+
+        second_response = client.chat.completions.create(
+            model="gpt-4-turbo",
+            messages=messages,
+        )
+        return second_response"""
+    
 
 
 def click_button():
@@ -117,6 +275,7 @@ def check_key():
             tools=[{"type": "file_search"}]
         )
         st.session_state.correct_key = True
+        print("Key is correct!")
     except Exception:
         st.session_state.correct_key = False
 
