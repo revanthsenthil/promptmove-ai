@@ -57,18 +57,18 @@ def create_assistant():
                 {
                 "type": "function",
                     "function": {
-                        "name": "move_to_object",
-                        "description": "Walk to an object or location in the house",
+                        "name": "perform_action_on_object",
+                        "description": "Perform an action to an object in the house",
                         "parameters": {
                             "type": "object",
                             "properties": {
                                 "action": {
                                     "type": "string",
-                                    "description": "the string 'walk' to represent walking towards object or location",
+                                    "description": "the action to represent doing something with an object or location. Eg. 'walk', 'sit', 'find', 'eat', 'move'",
                                 },
                                 "object": {
                                     "type": "string", 
-                                    "description": "the object or location to walk to",
+                                    "description": "the object or location to perform the action on. Eg. 'sofa', 'kitchen', 'cat'",
                                 },
                             },
                             "required": ["object"],
