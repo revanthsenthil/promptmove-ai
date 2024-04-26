@@ -7,9 +7,9 @@ from tqdm import tqdm
 from utils_demo import get_scene_cameras,display_scene_cameras,display_grid_img,find_nodes,add_node,add_edge
 
 
-file_name = "../virtualhome/virtualhome/simulation/linux_exec/linux_exec.v2.3.0.x86_64" # path to executable
+file_name = "../src/linux_exec.v2.3.0.x86_64" 
 
-comm = UnityCommunication(file_name=file_name, port="8082", x_display="0", timeout_wait=120)
+comm = UnityCommunication(file_name=file_name, port="8082", x_display="1", timeout_wait=120)
 
 views = []
 for scene_id in tqdm(range(10)):

@@ -30,12 +30,12 @@ def create_assistant():
 
     # Upload files with an "assistants" purpose
     house_info_file = client.files.create(
-        file=open(p +'/house_information.json', "rb"),
+        file=open('/app/config/house_information.json', "rb"),
         purpose='assistants'
     )
 
     example_functions = client.files.create(
-        file=open(p + '/example_virtualhome_functions.py', "rb"),
+        file=open('/app/config/example_virtualhome_functions.py', "rb"),
         purpose='assistants'
     )
 
