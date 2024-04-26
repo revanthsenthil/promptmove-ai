@@ -71,7 +71,7 @@ def create_assistant():
                                     "description": "the object or location to perform the action on. Eg. 'sofa', 'kitchen', 'cat'",
                                 },
                             },
-                            "required": ["object"],
+                            "required": ["object", "action"],
                         },
                     },
                 }
