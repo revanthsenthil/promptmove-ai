@@ -16,10 +16,10 @@ def perform_action_on_object(action, object):
     with open('../config/objs_env4.json') as f:
         object_info = json.load(f)
 
-    object = object.lower()
+    object = object.lower().replace(" ", "")
     action = action.lower()
 
-    acceptable_actions = ['walk']
+    acceptable_actions = ['walk', 'find']
 
     # check if object and action are acceptable
     if object not in object_info:

@@ -36,7 +36,6 @@ def create_assistant():
             model="gpt-4-turbo",
             tools=
             [
-                {"type": "file_search"},
                 {
                 "type": "function",
                     "function": {
@@ -51,7 +50,7 @@ def create_assistant():
                                 },
                                 "object": {
                                     "type": "string", 
-                                    "description": "the object or location to perform the action on. Eg. 'sofa', 'kitchen', 'cat'",
+                                    "description": "the object or location to perform the action on. Eg. 'sofa', 'kitchen', 'keyboard'",
                                 },
                             },
                             "required": ["object", "action"],
@@ -64,30 +63,6 @@ def create_assistant():
         st.error("Error creating assistant. Please check your credentials.")
         return None
     
-    # Create a vector store
-    vector_store = client.beta.vector_stores.create(name="Simulated House Information")
-    
-    # Ready the files for upload to OpenAI 
-    file_paths = [p +'/house_information.json']
-    file_streams = [open(path, "rb") for path in file_paths]
-    
-    # Use the upload and poll SDK helper to upload the files, add them to the vector store,
-    # and poll the status of the file batch for completion.
-    try:
-        _ = client.beta.vector_stores.file_batches.upload_and_poll(
-            vector_store_id = vector_store.id, 
-            files = file_streams
-        )
-    except openai.InternalServerError:
-        print("Error uploading files.")
-        pass
-
-    # update assistant to use new vector store
-    assistant = client.beta.assistants.update(
-        assistant_id = assistant.id,
-        tool_resources = {"file_search": {"vector_store_ids": [vector_store.id]}},
-    )
-
     # Create one thread per user
     thread = client.beta.threads.create()
 
@@ -121,8 +96,10 @@ def generate_response(user_input):
         )
         print(messages)
         return messages.data[0].content[0].text.value
-    else:
+    elif run.status == 'requires_action':
         print(run.status)
+    else:
+        print(f"Error: {run.status}")
 
     # Define the list to store tool outputs
     tool_outputs = []
@@ -166,17 +143,19 @@ def generate_response(user_input):
             print("Tool outputs submitted successfully.")
         except Exception as e:
             print("Failed to submit tool outputs:", e)
-        else:
-            print("No tool outputs to submit.")
 
         if run.status == 'completed':
             messages = client.beta.threads.messages.list(
                 thread_id=thread.id
             )
             print(messages)
+        elif run.status == 'requires_action':
+            print(run.status)
         else:
             print(run.status)
-        
+
+        if not messages:
+            return "Request Completed."
         return messages.data[0].content[0].text.value
 
     else:
@@ -190,8 +169,7 @@ def generate_response(user_input):
         )
 
         # create a run associated with the thread
-        run = client.beta.threads.runs.create(
-            thread_id=thread.id,
+        run = client.beta.threads.runs.create(            thread_id=thread.id,
             assistant_id=assistant.id
         )
 
