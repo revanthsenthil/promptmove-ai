@@ -1,6 +1,7 @@
 *.env
 *.egg
 *.wav
+*.egg-info
 
 # Compiled source #
 ###################
@@ -39,3 +40,9 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Python cache
+######################
+__pycache__/
+*.pyc
+*.pyo

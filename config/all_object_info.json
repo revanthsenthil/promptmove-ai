@@ -1,0 +1,2025 @@
+{
+    "addressbook": [
+        "grab",
+        "cut",
+        "CAN_OPEN",
+        "read",
+        "HAS_PAPER",
+        "move"
+    ],
+    "notes": [
+        "grab",
+        "read",
+        "HAS_PAPER",
+        "move"
+    ],
+    "aftershave": [
+        "grab",
+        "pour",
+        "CAN_OPEN",
+        "move",
+        "CREAM"
+    ],
+    "facecream": [
+        "grab",
+        "pour",
+        "move",
+        "CREAM"
+    ],
+    "alarmclock": [
+        "grab",
+        "HAS_SWITCH",
+        "look",
+        "HAS_PLUG",
+        "move"
+    ],
+    "clock": [
+        "grab",
+        "HAS_SWITCH",
+        "look",
+        "HAS_PLUG",
+        "move"
+    ],
+    "alcohol": [
+        "grab",
+        "drink",
+        "pour",
+        "move"
+    ],
+    "armsboth": [
+        "BODY_PART"
+    ],
+    "armsleft": [
+        "BODY_PART"
+    ],
+    "armsright": [
+        "BODY_PART"
+    ],
+    "bag": [
+        "grab",
+        "RECIPIENT",
+        "CAN_OPEN",
+        "CONTAINERS",
+        "COVER_OBJECT",
+        "move"
+    ],
+    "band-aids": [
+        "grab",
+        "cut",
+        "move"
+    ],
+    "basketforclothes": [
+        "grab",
+        "CAN_OPEN",
+        "CONTAINERS",
+        "move"
+    ],
+    "clothespile": [
+        "grab",
+        "CAN_OPEN",
+        "CONTAINERS",
+        "move"
+    ],
+    "bathroomcabinet": [
+        "SURFACES",
+        "CAN_OPEN",
+        "CONTAINERS"
+    ],
+    "bathroomcounter": [
+        "SURFACES"
+    ],
+    "bathtub": [
+        "sit",
+        "lie"
+    ],
+    "bed": [
+        "SURFACES",
+        "sit",
+        "lie"
+    ],
+    "beer": [
+        "grab",
+        "drink",
+        "pour",
+        "CAN_OPEN",
+        "move"
+    ],
+    "bench": [
+        "SURFACES",
+        "sit",
+        "lie",
+        "move"
+    ],
+    "bills": [
+        "grab",
+        "cut",
+        "read",
+        "HAS_PAPER",
+        "move"
+    ],
+    "bird": [],
+    "blanket": [
+        "grab",
+        "COVER_OBJECT",
+        "move"
+    ],
+    "blender": [
+        "grab",
+        "RECIPIENT",
+        "pour",
+        "CAN_OPEN",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "blowdryer": [
+        "grab",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "boardgame": [
+        "SURFACES",
+        "grab",
+        "look",
+        "move"
+    ],
+    "book": [
+        "grab",
+        "cut",
+        "CAN_OPEN",
+        "read",
+        "HAS_PAPER",
+        "move"
+    ],
+    "bookmark": [
+        "grab",
+        "HAS_PAPER",
+        "move"
+    ],
+    "bookshelf": [
+        "SURFACES",
+        "CONTAINERS"
+    ],
+    "bowl": [
+        "grab",
+        "RECIPIENT",
+        "move"
+    ],
+    "dishbowl": [
+        "grab",
+        "RECIPIENT",
+        "move"
+    ],
+    "box": [
+        "grab",
+        "RECIPIENT",
+        "CAN_OPEN",
+        "CONTAINERS",
+        "COVER_OBJECT",
+        "move"
+    ],
+    "broom": [
+        "grab",
+        "move"
+    ],
+    "brush": [
+        "grab",
+        "move"
+    ],
+    "button": [
+        "grab",
+        "move"
+    ],
+    "cabinet": [
+        "SURFACES",
+        "CAN_OPEN",
+        "CONTAINERS"
+    ],
+    "candle": [
+        "grab",
+        "HAS_SWITCH",
+        "move"
+    ],
+    "cards": [
+        "grab",
+        "cut",
+        "HAS_PAPER",
+        "move"
+    ],
+    "carpet": [
+        "SURFACES",
+        "move"
+    ],
+    "rug": [
+        "SURFACES",
+        "grab",
+        "sit",
+        "lie",
+        "move"
+    ],
+    "cat": [
+        "grab",
+        "move"
+    ],
+    "cd": [
+        "grab",
+        "move"
+    ],
+    "cdplayer": [
+        "SURFACES",
+        "grab",
+        "CAN_OPEN",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "radio": [
+        "SURFACES",
+        "grab",
+        "CAN_OPEN",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "ceiling": [],
+    "cellphone": [
+        "grab",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "centerpiece": [
+        "grab",
+        "look",
+        "COVER_OBJECT",
+        "move"
+    ],
+    "chair": [
+        "SURFACES",
+        "grab",
+        "sit",
+        "move"
+    ],
+    "check": [
+        "grab",
+        "read",
+        "HAS_PAPER",
+        "move"
+    ],
+    "paper": [
+        "grab",
+        "read",
+        "HAS_PAPER",
+        "move"
+    ],
+    "chefknife": [
+        "grab",
+        "move"
+    ],
+    "chessboard": [
+        "SURFACES",
+        "grab",
+        "move"
+    ],
+    "child": [
+        "PERSON"
+    ],
+    "cleaningbottle": [
+        "grab",
+        "pour",
+        "CAN_OPEN",
+        "move"
+    ],
+    "dishwashingliquid": [
+        "grab",
+        "pour",
+        "move",
+        "CREAM"
+    ],
+    "cleaningsolution": [
+        "grab",
+        "pour",
+        "move"
+    ],
+    "closet": [
+        "CAN_OPEN",
+        "CONTAINERS"
+    ],
+    "clothnapkin": [
+        "grab",
+        "cut",
+        "COVER_OBJECT",
+        "HAS_PAPER",
+        "move"
+    ],
+    "napkin": [
+        "grab",
+        "COVER_OBJECT",
+        "HAS_PAPER",
+        "move"
+    ],
+    "papertowel": [
+        "grab",
+        "hang",
+        "cut",
+        "COVER_OBJECT",
+        "HAS_PAPER",
+        "move"
+    ],
+    "clothesdress": [
+        "grab",
+        "hang",
+        "CLOTHES",
+        "move"
+    ],
+    "clothesgloves": [
+        "grab",
+        "hang",
+        "CLOTHES",
+        "move"
+    ],
+    "clotheshat": [
+        "grab",
+        "hang",
+        "CLOTHES",
+        "move"
+    ],
+    "clothesjacket": [
+        "grab",
+        "hang",
+        "CLOTHES",
+        "move"
+    ],
+    "clothespants": [
+        "grab",
+        "hang",
+        "CLOTHES",
+        "move"
+    ],
+    "pants": [
+        "grab",
+        "hang",
+        "CLOTHES",
+        "move"
+    ],
+    "clothesscarf": [
+        "grab",
+        "hang",
+        "CLOTHES",
+        "move"
+    ],
+    "clothesshirt": [
+        "grab",
+        "hang",
+        "CLOTHES",
+        "move"
+    ],
+    "shirt": [
+        "grab",
+        "hang",
+        "CLOTHES",
+        "move"
+    ],
+    "clothesskirt": [
+        "grab",
+        "hang",
+        "CLOTHES",
+        "move"
+    ],
+    "clothessocks": [
+        "grab",
+        "hang",
+        "CLOTHES",
+        "move"
+    ],
+    "clothesunderwear": [
+        "grab",
+        "hang",
+        "CLOTHES",
+        "move"
+    ],
+    "coffemaker": [
+        "RECIPIENT",
+        "CAN_OPEN",
+        "HAS_SWITCH",
+        "CONTAINERS",
+        "HAS_PLUG",
+        "move"
+    ],
+    "coffeemaker": [
+        "RECIPIENT",
+        "CAN_OPEN",
+        "HAS_SWITCH",
+        "CONTAINERS",
+        "HAS_PLUG",
+        "move"
+    ],
+    "coffee": [
+        "grab",
+        "drink",
+        "pour",
+        "move"
+    ],
+    "coffeecup": [
+        "grab",
+        "RECIPIENT",
+        "pour",
+        "move"
+    ],
+    "mug": [
+        "grab",
+        "RECIPIENT",
+        "pour",
+        "move"
+    ],
+    "coffeefilter": [
+        "grab",
+        "HAS_PAPER",
+        "move"
+    ],
+    "coffeepot": [
+        "grab",
+        "RECIPIENT",
+        "CAN_OPEN",
+        "move"
+    ],
+    "coffeetable": [
+        "SURFACES",
+        "move"
+    ],
+    "coin": [
+        "grab",
+        "move"
+    ],
+    "colander": [
+        "grab",
+        "RECIPIENT",
+        "move"
+    ],
+    "comb": [
+        "grab",
+        "move"
+    ],
+    "comforter": [
+        "grab",
+        "COVER_OBJECT",
+        "move"
+    ],
+    "computer": [
+        "HAS_SWITCH",
+        "look"
+    ],
+    "cpucase": [
+        "HAS_SWITCH",
+        "look"
+    ],
+    "pc": [
+        "HAS_SWITCH",
+        "look"
+    ],
+    "conditioner": [
+        "grab",
+        "pour",
+        "move",
+        "CREAM"
+    ],
+    "console": [
+        "grab",
+        "CAN_OPEN",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "controller": [
+        "grab",
+        "HAS_PLUG",
+        "move"
+    ],
+    "remotecontrol": [
+        "grab",
+        "HAS_SWITCH",
+        "move"
+    ],
+    "cookingpot": [
+        "grab",
+        "RECIPIENT",
+        "CAN_OPEN",
+        "move"
+    ],
+    "couch": [
+        "SURFACES",
+        "sit",
+        "lie",
+        "move"
+    ],
+    "sofa": [
+        "SURFACES",
+        "sit",
+        "lie",
+        "move"
+    ],
+    "crackers": [
+        "grab",
+        "move"
+    ],
+    "crayon": [
+        "grab",
+        "move"
+    ],
+    "crayons": [
+        "grab",
+        "move"
+    ],
+    "creditcard": [
+        "grab",
+        "move"
+    ],
+    "cup": [
+        "grab",
+        "RECIPIENT",
+        "pour",
+        "move"
+    ],
+    "waterglass": [
+        "grab",
+        "RECIPIENT",
+        "pour",
+        "move"
+    ],
+    "wineglass": [
+        "grab",
+        "RECIPIENT",
+        "pour",
+        "move"
+    ],
+    "cupboard": [
+        "CAN_OPEN",
+        "CONTAINERS"
+    ],
+    "kitchencabinets": [
+        "SURFACES",
+        "CAN_OPEN",
+        "CONTAINERS"
+    ],
+    "curtain": [
+        "CAN_OPEN",
+        "COVER_OBJECT",
+        "move"
+    ],
+    "curtains": [
+        "CAN_OPEN",
+        "COVER_OBJECT",
+        "move"
+    ],
+    "cuttingboard": [
+        "SURFACES",
+        "grab",
+        "move"
+    ],
+    "deckofcards": [
+        "grab",
+        "HAS_PAPER",
+        "move"
+    ],
+    "desk": [
+        "SURFACES",
+        "CAN_OPEN",
+        "move"
+    ],
+    "cputable": [
+        "SURFACES",
+        "CAN_OPEN",
+        "move"
+    ],
+    "detergent": [
+        "grab",
+        "pour",
+        "move"
+    ],
+    "diary": [
+        "grab",
+        "CAN_OPEN",
+        "read",
+        "HAS_PAPER",
+        "move"
+    ],
+    "journal": [
+        "grab",
+        "CAN_OPEN",
+        "read",
+        "HAS_PAPER",
+        "move"
+    ],
+    "dirt": [
+        "grab",
+        "pour",
+        "move"
+    ],
+    "dishsoap": [
+        "grab",
+        "pour",
+        "move",
+        "CREAM"
+    ],
+    "dishrack": [
+        "SURFACES",
+        "grab",
+        "move"
+    ],
+    "dishwasher": [
+        "CAN_OPEN",
+        "HAS_SWITCH",
+        "CONTAINERS"
+    ],
+    "document": [
+        "grab",
+        "read",
+        "HAS_PAPER",
+        "move"
+    ],
+    "dog": [
+        "grab",
+        "move"
+    ],
+    "door": [
+        "CAN_OPEN"
+    ],
+    "dough": [
+        "grab",
+        "move",
+        "CREAM"
+    ],
+    "drawing": [
+        "grab",
+        "cut",
+        "look",
+        "HAS_PAPER",
+        "move"
+    ],
+    "wallpictureframe": [
+        "grab",
+        "hang",
+        "HAS_PAPER",
+        "move"
+    ],
+    "dresser": [
+        "CAN_OPEN",
+        "CONTAINERS"
+    ],
+    "drinkingglass": [
+        "grab",
+        "RECIPIENT",
+        "pour",
+        "move"
+    ],
+    "drypasta": [
+        "grab",
+        "move"
+    ],
+    "dryingrack": [
+        "SURFACES"
+    ],
+    "duster": [
+        "grab",
+        "move"
+    ],
+    "dustpan": [
+        "grab",
+        "hang",
+        "move"
+    ],
+    "dvdplayer": [
+        "SURFACES",
+        "grab",
+        "CAN_OPEN",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "electricshaver": [
+        "grab",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "electricaloutlet": [
+        "HAS_SWITCH"
+    ],
+    "envelope": [
+        "grab",
+        "cut",
+        "CAN_OPEN",
+        "COVER_OBJECT",
+        "HAS_PAPER",
+        "move"
+    ],
+    "eyeleft": [
+        "CAN_OPEN",
+        "BODY_PART"
+    ],
+    "eyeright": [
+        "CAN_OPEN",
+        "BODY_PART"
+    ],
+    "eyesboth": [
+        "CAN_OPEN",
+        "BODY_PART"
+    ],
+    "face": [
+        "BODY_PART"
+    ],
+    "facesoap": [
+        "grab",
+        "pour",
+        "move",
+        "CREAM"
+    ],
+    "barsoap": [
+        "grab",
+        "move",
+        "CREAM"
+    ],
+    "facialcleanser": [
+        "grab",
+        "pour",
+        "move",
+        "CREAM"
+    ],
+    "faucet": [
+        "HAS_SWITCH"
+    ],
+    "faxmachine": [
+        "HAS_SWITCH",
+        "HAS_PLUG"
+    ],
+    "printer": [
+        "CAN_OPEN",
+        "HAS_SWITCH",
+        "CONTAINERS",
+        "HAS_PLUG"
+    ],
+    "feetboth": [
+        "BODY_PART"
+    ],
+    "feetleft": [
+        "BODY_PART"
+    ],
+    "feetright": [
+        "BODY_PART"
+    ],
+    "filingcabinet": [
+        "SURFACES",
+        "CAN_OPEN",
+        "CONTAINERS"
+    ],
+    "floor": [
+        "SURFACES"
+    ],
+    "floorlamp": [
+        "HAS_SWITCH",
+        "move"
+    ],
+    "lamp": [
+        "HAS_SWITCH",
+        "HAS_PLUG"
+    ],
+    "fly": [],
+    "folder": [
+        "grab",
+        "CAN_OPEN",
+        "read",
+        "CONTAINERS",
+        "HAS_PAPER",
+        "move"
+    ],
+    "foodapple": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "apple": [
+        "grab",
+        "move"
+    ],
+    "foodbacon": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "foodbanana": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "banana": [
+        "grab",
+        "move"
+    ],
+    "foodbread": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "bread": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "breadslice": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "foodbutter": [
+        "grab",
+        "move",
+        "CREAM"
+    ],
+    "foodcake": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "foodcarrot": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "carrot": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "foodcereal": [
+        "grab",
+        "eat",
+        "pour",
+        "CAN_OPEN",
+        "move"
+    ],
+    "cereal": [
+        "grab",
+        "eat",
+        "move"
+    ],
+    "foodcheese": [
+        "grab",
+        "eat",
+        "cut",
+        "move",
+        "CREAM"
+    ],
+    "foodchicken": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "chicken": [
+        "grab",
+        "move"
+    ],
+    "fooddessert": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "cupcake": [
+        "grab",
+        "eat",
+        "move"
+    ],
+    "milkshake": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "pancake": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "pie": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "poundcake": [
+        "grab",
+        "eat",
+        "move"
+    ],
+    "pudding": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "sundae": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "watermelon": [
+        "grab",
+        "move"
+    ],
+    "creamybuns": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "fooddonut": [
+        "grab",
+        "move"
+    ],
+    "foodegg": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "foodfish": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "salmon": [
+        "grab",
+        "move"
+    ],
+    "foodfood": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "potato": [
+        "grab",
+        "move"
+    ],
+    "bellpepper": [
+        "grab",
+        "move"
+    ],
+    "chocolatesyrup": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "whippedcream": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "bananas": [
+        "grab",
+        "move"
+    ],
+    "cutlets": [
+        "grab",
+        "move"
+    ],
+    "chinesefood": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "pear": [
+        "grab",
+        "move"
+    ],
+    "plum": [
+        "grab",
+        "move"
+    ],
+    "orange": [
+        "grab",
+        "move"
+    ],
+    "cucumber": [
+        "grab",
+        "move"
+    ],
+    "tomato": [
+        "grab",
+        "move"
+    ],
+    "foodfruit": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "foodhamburger": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "mincedmeat": [
+        "grab",
+        "move"
+    ],
+    "foodicecream": [
+        "grab",
+        "move",
+        "CREAM"
+    ],
+    "foodjam": [
+        "grab",
+        "eat",
+        "CAN_OPEN",
+        "move",
+        "CREAM"
+    ],
+    "foodkiwi": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "foodlemon": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "lemon": [
+        "grab",
+        "move"
+    ],
+    "foodnoodles": [
+        "grab",
+        "eat",
+        "move"
+    ],
+    "foodoatmeal": [
+        "grab",
+        "eat",
+        "move"
+    ],
+    "foodonion": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "foodorange": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "foodpeanutbutter": [
+        "grab",
+        "eat",
+        "move",
+        "CREAM"
+    ],
+    "foodpizza": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "foodpotato": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "foodrice": [
+        "grab",
+        "eat",
+        "pour",
+        "move"
+    ],
+    "foodsalt": [
+        "grab",
+        "eat",
+        "pour",
+        "move"
+    ],
+    "condimentshaker": [
+        "grab",
+        "eat",
+        "pour",
+        "move"
+    ],
+    "foodsnack": [
+        "grab",
+        "eat",
+        "move"
+    ],
+    "candybar": [
+        "grab",
+        "eat",
+        "move"
+    ],
+    "saltcrackers": [
+        "grab",
+        "move"
+    ],
+    "chips": [
+        "grab",
+        "move"
+    ],
+    "foodsteak": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "foodsugar": [
+        "grab",
+        "eat",
+        "pour",
+        "move"
+    ],
+    "foodturkey": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "foodvegetable": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "salad": [
+        "grab",
+        "eat",
+        "cut",
+        "move"
+    ],
+    "fork": [
+        "grab",
+        "move"
+    ],
+    "cutleryfork": [
+        "grab",
+        "move"
+    ],
+    "form": [
+        "grab",
+        "HAS_PAPER",
+        "move"
+    ],
+    "foundation": [
+        "grab",
+        "move",
+        "CREAM"
+    ],
+    "freezer": [
+        "CAN_OPEN",
+        "HAS_SWITCH",
+        "CONTAINERS",
+        "HAS_PLUG"
+    ],
+    "fridge": [
+        "CAN_OPEN",
+        "HAS_SWITCH",
+        "CONTAINERS",
+        "HAS_PLUG"
+    ],
+    "fryingpan": [
+        "SURFACES",
+        "grab",
+        "RECIPIENT",
+        "CONTAINERS",
+        "move"
+    ],
+    "garbagecan": [
+        "CAN_OPEN",
+        "CONTAINERS",
+        "move"
+    ],
+    "glass": [
+        "grab",
+        "RECIPIENT",
+        "pour",
+        "move"
+    ],
+    "glue": [
+        "grab",
+        "move",
+        "CREAM"
+    ],
+    "groceries": [
+        "grab",
+        "move"
+    ],
+    "lime": [
+        "grab",
+        "move"
+    ],
+    "groundcoffee": [
+        "grab",
+        "CAN_OPEN",
+        "move"
+    ],
+    "hair": [
+        "grab",
+        "cut",
+        "BODY_PART",
+        "move"
+    ],
+    "hairbrush": [
+        "grab",
+        "move"
+    ],
+    "hairdryer": [
+        "grab",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "handsboth": [
+        "BODY_PART"
+    ],
+    "handsleft": [
+        "BODY_PART"
+    ],
+    "handsright": [
+        "BODY_PART"
+    ],
+    "hanger": [
+        "grab",
+        "hang",
+        "move"
+    ],
+    "coatrack": [
+        "grab",
+        "hang",
+        "move"
+    ],
+    "headset": [
+        "grab",
+        "CLOTHES",
+        "move"
+    ],
+    "highlighter": [
+        "grab",
+        "move"
+    ],
+    "pen": [
+        "grab",
+        "move"
+    ],
+    "homework": [
+        "grab",
+        "read",
+        "HAS_PAPER",
+        "move"
+    ],
+    "ice": [
+        "grab",
+        "move"
+    ],
+    "instrumentguitar": [
+        "grab",
+        "HAS_SWITCH",
+        "move"
+    ],
+    "instrumentpiano": [],
+    "instrumentviolin": [
+        "grab",
+        "move"
+    ],
+    "iron": [
+        "grab",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "ironingboard": [
+        "SURFACES",
+        "move"
+    ],
+    "jelly": [
+        "grab",
+        "CAN_OPEN",
+        "move",
+        "CREAM"
+    ],
+    "juice": [
+        "grab",
+        "drink",
+        "pour",
+        "move"
+    ],
+    "kettle": [
+        "grab",
+        "RECIPIENT",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "keyboard": [
+        "grab",
+        "HAS_PLUG",
+        "move"
+    ],
+    "keys": [
+        "grab",
+        "move"
+    ],
+    "kitchencabinet": [
+        "SURFACES",
+        "CAN_OPEN",
+        "CONTAINERS"
+    ],
+    "kitchencounter": [
+        "SURFACES"
+    ],
+    "kitchencounterdrawers": [
+        "CONTAINERS",
+        "CAN_OPEN"
+    ],
+    "knife": [
+        "grab",
+        "move"
+    ],
+    "cutleryknife": [
+        "grab",
+        "move"
+    ],
+    "laptop": [
+        "grab",
+        "HAS_SWITCH",
+        "look",
+        "HAS_PLUG",
+        "move"
+    ],
+    "laserpointer": [
+        "grab",
+        "HAS_SWITCH",
+        "move"
+    ],
+    "laundrydetergent": [
+        "grab",
+        "pour",
+        "move"
+    ],
+    "legsboth": [
+        "BODY_PART"
+    ],
+    "legsleft": [
+        "BODY_PART"
+    ],
+    "legsright": [
+        "BODY_PART"
+    ],
+    "light": [
+        "HAS_SWITCH",
+        "HAS_PLUG"
+    ],
+    "lightswitch": [
+        "HAS_SWITCH",
+        "HAS_PLUG"
+    ],
+    "lightbulb": [
+        "grab",
+        "HAS_SWITCH",
+        "move"
+    ],
+    "lighter": [
+        "grab",
+        "HAS_SWITCH",
+        "move"
+    ],
+    "lighting": [
+        "HAS_SWITCH",
+        "HAS_PLUG"
+    ],
+    "loveseat": [
+        "SURFACES",
+        "sit",
+        "lie",
+        "move"
+    ],
+    "magazine": [
+        "grab",
+        "CAN_OPEN",
+        "read",
+        "COVER_OBJECT",
+        "HAS_PAPER",
+        "move"
+    ],
+    "mail": [
+        "grab",
+        "CAN_OPEN",
+        "read",
+        "HAS_PAPER",
+        "move"
+    ],
+    "man": [
+        "PERSON"
+    ],
+    "mat": [
+        "SURFACES",
+        "grab",
+        "sit",
+        "lie",
+        "move"
+    ],
+    "measuringcup": [
+        "grab",
+        "RECIPIENT",
+        "pour",
+        "move"
+    ],
+    "mechanicalpencil": [
+        "grab",
+        "move"
+    ],
+    "microphone": [
+        "grab",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "microwave": [
+        "CAN_OPEN",
+        "HAS_SWITCH",
+        "CONTAINERS",
+        "HAS_PLUG"
+    ],
+    "milk": [
+        "grab",
+        "drink",
+        "pour",
+        "CAN_OPEN",
+        "move"
+    ],
+    "mini-fridge": [
+        "CAN_OPEN",
+        "HAS_SWITCH",
+        "CONTAINERS",
+        "HAS_PLUG"
+    ],
+    "mirror": [],
+    "mop": [
+        "grab",
+        "move"
+    ],
+    "mopbucket": [
+        "grab",
+        "RECIPIENT",
+        "move"
+    ],
+    "bucket": [
+        "grab",
+        "RECIPIENT",
+        "move"
+    ],
+    "mouse": [
+        "grab",
+        "HAS_PLUG",
+        "move"
+    ],
+    "mousepad": [
+        "SURFACES",
+        "move"
+    ],
+    "mousemat": [
+        "SURFACES",
+        "move"
+    ],
+    "mouthwash": [
+        "grab",
+        "drink",
+        "pour",
+        "move"
+    ],
+    "musicstand": [
+        "SURFACES",
+        "CAN_OPEN",
+        "CONTAINERS",
+        "move"
+    ],
+    "nailpolish": [
+        "grab",
+        "CAN_OPEN",
+        "move",
+        "CREAM"
+    ],
+    "needle": [
+        "grab",
+        "move"
+    ],
+    "newspaper": [
+        "grab",
+        "CAN_OPEN",
+        "read",
+        "COVER_OBJECT",
+        "HAS_PAPER",
+        "move"
+    ],
+    "nightstand": [
+        "SURFACES",
+        "CAN_OPEN",
+        "CONTAINERS"
+    ],
+    "notepad": [
+        "grab",
+        "cut",
+        "CAN_OPEN",
+        "read",
+        "HAS_PAPER",
+        "move"
+    ],
+    "notebook": [
+        "grab",
+        "cut",
+        "CAN_OPEN",
+        "read",
+        "HAS_PAPER",
+        "move"
+    ],
+    "novel": [
+        "grab",
+        "cut",
+        "CAN_OPEN",
+        "read",
+        "HAS_PAPER",
+        "move"
+    ],
+    "oil": [
+        "grab",
+        "drink",
+        "pour",
+        "move"
+    ],
+    "condimentbottle": [
+        "grab",
+        "pour",
+        "move",
+        "CREAM"
+    ],
+    "oven": [
+        "CAN_OPEN",
+        "HAS_SWITCH",
+        "CONTAINERS",
+        "HAS_PLUG"
+    ],
+    "stove": [
+        "SURFACES",
+        "CAN_OPEN",
+        "HAS_SWITCH",
+        "CONTAINERS"
+    ],
+    "ovenmitts": [
+        "grab",
+        "hang",
+        "CLOTHES",
+        "move"
+    ],
+    "painting": [
+        "grab",
+        "hang",
+        "HAS_PAPER",
+        "move"
+    ],
+    "pajamas": [
+        "grab",
+        "CLOTHES",
+        "move"
+    ],
+    "pantry": [
+        "SURFACES"
+    ],
+    "pasta": [
+        "grab",
+        "pour",
+        "move"
+    ],
+    "pencil": [
+        "grab",
+        "move"
+    ],
+    "phone": [
+        "grab",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "wallphone": [
+        "grab",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "pianobench": [
+        "SURFACES",
+        "grab",
+        "sit",
+        "move"
+    ],
+    "picture": [
+        "grab",
+        "hang",
+        "HAS_PAPER",
+        "move"
+    ],
+    "pillow": [
+        "grab",
+        "move"
+    ],
+    "placemat": [
+        "SURFACES",
+        "grab",
+        "COVER_OBJECT",
+        "move"
+    ],
+    "plate": [
+        "SURFACES",
+        "grab",
+        "RECIPIENT",
+        "move"
+    ],
+    "pot": [
+        "grab",
+        "RECIPIENT",
+        "CAN_OPEN",
+        "move"
+    ],
+    "printingpaper": [
+        "grab",
+        "cut",
+        "HAS_PAPER",
+        "move"
+    ],
+    "purse": [
+        "grab",
+        "RECIPIENT",
+        "CAN_OPEN",
+        "CONTAINERS",
+        "COVER_OBJECT",
+        "move"
+    ],
+    "rag": [
+        "grab",
+        "RECIPIENT",
+        "COVER_OBJECT",
+        "move"
+    ],
+    "razor": [
+        "grab",
+        "move"
+    ],
+    "receipt": [
+        "grab",
+        "read",
+        "HAS_PAPER",
+        "move"
+    ],
+    "sauce": [
+        "grab",
+        "pour",
+        "move",
+        "CREAM"
+    ],
+    "saucepan": [
+        "SURFACES",
+        "grab",
+        "RECIPIENT",
+        "CONTAINERS",
+        "move"
+    ],
+    "scissors": [
+        "grab",
+        "move"
+    ],
+    "scrabble": [
+        "grab",
+        "move"
+    ],
+    "shampoo": [
+        "grab",
+        "pour",
+        "CAN_OPEN",
+        "move"
+    ],
+    "lotionbottle": [
+        "grab",
+        "pour",
+        "CAN_OPEN",
+        "move"
+    ],
+    "hairproduct": [
+        "grab",
+        "pour",
+        "CAN_OPEN",
+        "move"
+    ],
+    "shavingcream": [
+        "grab",
+        "pour",
+        "move",
+        "CREAM"
+    ],
+    "sheets": [
+        "grab",
+        "COVER_OBJECT",
+        "move"
+    ],
+    "shoe-shinekit": [
+        "grab",
+        "CAN_OPEN",
+        "move"
+    ],
+    "shoerack": [
+        "SURFACES",
+        "grab",
+        "move"
+    ],
+    "shoes": [
+        "grab",
+        "CLOTHES",
+        "move"
+    ],
+    "slippers": [
+        "grab",
+        "hang",
+        "CLOTHES",
+        "move"
+    ],
+    "shower": [],
+    "stall": [],
+    "shredder": [
+        "HAS_SWITCH",
+        "CONTAINERS",
+        "HAS_PLUG"
+    ],
+    "sink": [
+        "RECIPIENT",
+        "CONTAINERS"
+    ],
+    "soap": [
+        "grab",
+        "move",
+        "CREAM"
+    ],
+    "spectacles": [
+        "grab",
+        "CLOTHES",
+        "move"
+    ],
+    "glasses": [
+        "grab",
+        "CLOTHES",
+        "move"
+    ],
+    "sponge": [
+        "grab",
+        "move"
+    ],
+    "washingsponge": [
+        "grab",
+        "move"
+    ],
+    "spoon": [
+        "grab",
+        "move"
+    ],
+    "stamp": [
+        "grab",
+        "move"
+    ],
+    "stereo": [
+        "SURFACES",
+        "grab",
+        "CAN_OPEN",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "table": [
+        "SURFACES",
+        "move"
+    ],
+    "diningtable": [
+        "SURFACES",
+        "move"
+    ],
+    "kitchentable": [
+        "SURFACES",
+        "move"
+    ],
+    "tablecloth": [
+        "SURFACES",
+        "grab",
+        "COVER_OBJECT",
+        "move"
+    ],
+    "tape": [
+        "grab",
+        "move"
+    ],
+    "tea": [
+        "grab",
+        "drink",
+        "pour",
+        "move"
+    ],
+    "teabag": [
+        "grab",
+        "move"
+    ],
+    "teeth": [
+        "grab",
+        "move"
+    ],
+    "telephone": [
+        "grab",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "television": [
+        "HAS_SWITCH",
+        "look",
+        "HAS_PLUG"
+    ],
+    "tv": [
+        "HAS_SWITCH",
+        "look",
+        "HAS_PLUG"
+    ],
+    "walltv": [
+        "HAS_SWITCH",
+        "look",
+        "HAS_PLUG"
+    ],
+    "textbook": [
+        "grab",
+        "cut",
+        "CAN_OPEN",
+        "read",
+        "HAS_PAPER",
+        "move"
+    ],
+    "thread": [
+        "grab",
+        "cut",
+        "move"
+    ],
+    "toaster": [
+        "HAS_SWITCH",
+        "CONTAINERS",
+        "HAS_PLUG",
+        "move"
+    ],
+    "toilet": [
+        "sit",
+        "CAN_OPEN",
+        "CONTAINERS"
+    ],
+    "toiletpaper": [
+        "grab",
+        "hang",
+        "cut",
+        "COVER_OBJECT",
+        "HAS_PAPER",
+        "move"
+    ],
+    "toothpaste": [
+        "grab",
+        "pour",
+        "CAN_OPEN",
+        "move",
+        "CREAM"
+    ],
+    "toothbrush": [
+        "grab",
+        "RECIPIENT",
+        "move"
+    ],
+    "toothbrushholder": [
+        "grab",
+        "CONTAINERS",
+        "move"
+    ],
+    "towel": [
+        "grab",
+        "COVER_OBJECT",
+        "move"
+    ],
+    "towelrack": [
+        "SURFACES",
+        "grab",
+        "move"
+    ],
+    "toy": [
+        "grab",
+        "move"
+    ],
+    "sportsball": [
+        "grab",
+        "move"
+    ],
+    "teddybear": [
+        "grab",
+        "move"
+    ],
+    "globe": [
+        "grab",
+        "move"
+    ],
+    "trashcan": [
+        "CAN_OPEN",
+        "CONTAINERS",
+        "move"
+    ],
+    "tray": [
+        "SURFACES",
+        "grab",
+        "move"
+    ],
+    "oventray": [
+        "SURFACES",
+        "grab",
+        "move"
+    ],
+    "vacuumcleaner": [
+        "grab",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "videogameconsole": [
+        "CAN_OPEN",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "videogamecontroller": [
+        "grab",
+        "HAS_SWITCH",
+        "HAS_PLUG",
+        "move"
+    ],
+    "wall": [],
+    "wallclock": [
+        "grab",
+        "HAS_SWITCH",
+        "look",
+        "HAS_PLUG",
+        "move"
+    ],
+    "washingmachine": [
+        "RECIPIENT",
+        "CAN_OPEN",
+        "HAS_SWITCH",
+        "CONTAINERS",
+        "HAS_PLUG"
+    ],
+    "water": [
+        "drink",
+        "pour"
+    ],
+    "bottlewater": [
+        "drink",
+        "pour"
+    ],
+    "window": [
+        "CAN_OPEN"
+    ],
+    "wine": [
+        "grab",
+        "drink",
+        "pour",
+        "move"
+    ],
+    "woman": [
+        "PERSON"
+    ],
+    "woodenspoon": [
+        "grab",
+        "move"
+    ]
+}
