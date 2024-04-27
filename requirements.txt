@@ -2,5 +2,5 @@
 pyaudio
 openai
 streamlit
-virtualhome
+virtualhome @ git+https://github.com/MadSons/virtualhome.git
 pytest
