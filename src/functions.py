@@ -1,38 +1,19 @@
-
 from virtualhome.simulation.unity_simulator import UnityCommunication
 from virtualhome.simulation.unity_simulator import utils_viz
+from utils import find_nodes
 
-import matplotlib.pyplot as plt
-import datetime
-from tqdm import tqdm
 import os
-
-from scripts.utils_demo import get_scene_cameras,display_scene_cameras,display_grid_img,find_nodes,add_node,add_edge
-
 import json
 
 ACTIONS = []
 OBJECTS = []
-
-def get_current_weather(location, unit="fahrenheit"):
-    """Get the current weather in a given location"""
-    print(f"Running get_current_weather({location})")
-
-    if "tokyo" in location.lower():
-        return json.dumps({"location": "Tokyo", "temperature": "10", "unit": unit})
-    elif "san francisco" in location.lower():
-        return json.dumps({"location": "San Francisco", "temperature": "72", "unit": unit})
-    elif "paris" in location.lower():
-        return json.dumps({"location": "Paris", "temperature": "22", "unit": unit})
-    else:
-        return json.dumps({"location": location, "temperature": "unknown"})
     
 def perform_action_on_object(action, object):
     """Perform an action on an object in a virtual home environment"""
     print(f"Running perform_action_on_object({action}, {object})")
     global ACTIONS, OBJECTS
 
-    with open('../config/all_object_info.json') as f:
+    with open('../config/objs_env4.json') as f:
         object_info = json.load(f)
 
     object = object.lower()
@@ -54,7 +35,7 @@ def perform_action_on_object(action, object):
     print(f"Appended {action} on {object} to the list")
     return json.dumps({"action": action, "object": object, "status": "success"})
 
-def run_script():
+def run_script(date : str):
     """Run the scrupt for performing actions on objects in a virtual home environment"""
     global ACTIONS, OBJECTS
     print(f"Running run_script({ACTIONS}, {OBJECTS})")
@@ -93,9 +74,8 @@ def run_script():
                                         skip_animation=False,
                                         recording=True,
                                         save_pose_data=True,
-                                        file_name_prefix='relax')
-
-    directory = './Output/relax/0'
+                                        file_name_prefix=date)
+    directory = f'./Output/{date}/0'
 
     print(os.listdir(directory))
 
@@ -112,11 +92,17 @@ def run_script():
                 
 
     path_video = f"./Output"
+    video_output_path = f'video_output/{date}'
 
-    if os.path.exists('video_normal.mp4'):
-        os.remove('video_normal.mp4')
+    try:
+        os.mkdir(video_output_path)
+    except OSError:
+        pass
 
-    utils_viz.generate_video(input_path=path_video, prefix='relax', output_path='.')
+    if os.path.exists(os.path.join(video_output_path, 'video_normal.mp4')):
+        os.remove(os.path.join(video_output_path, 'video_normal.mp4'))
+
+    utils_viz.generate_video(input_path=path_video, prefix=date, output_path=video_output_path)
 
     # reset everything
     comm.close()

@@ -6,7 +6,7 @@ import datetime
 from tqdm import tqdm
 import os
 
-from utils_demo import get_scene_cameras,display_scene_cameras,display_grid_img,find_nodes,add_node,add_edge
+from utils import get_scene_cameras,display_scene_cameras,display_grid_img,find_nodes,add_node,add_edge
 
 
 file_name = "../src/linux_exec.v2.3.0.x86_64" # path to executable

@@ -10,11 +10,12 @@ import openai
 import streamlit as st
 
 import audio.transcribe as transcribe
-from functions import get_current_weather, perform_action_on_object, run_script
+from functions import perform_action_on_object, run_script
 
 import os
 import re
 import json
+import datetime
 
 p = os.path.abspath("../config")
 
@@ -36,24 +37,6 @@ def create_assistant():
             tools=
             [
                 {"type": "file_search"},
-                {
-                "type": "function",
-                    "function": {
-                        "name": "get_current_weather",
-                        "description": "Get the current weather in a given location",
-                        "parameters": {
-                            "type": "object",
-                            "properties": {
-                                "location": {
-                                    "type": "string",
-                                    "description": "The city and state, e.g. San Francisco, CA",
-                                },
-                                "unit": {"type": "string", "enum": ["fahrenheit", "celsius"]},
-                            },
-                            "required": ["location"],
-                        },
-                    },
-                },
                 {
                 "type": "function",
                     "function": {
@@ -150,7 +133,6 @@ def generate_response(user_input):
 
     if tool_calls:
         available_functions = {
-            "get_current_weather": get_current_weather,
             'perform_action_on_object': perform_action_on_object
         }
         for tool_call in tool_calls:
@@ -328,10 +310,11 @@ def main():
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
                 response = generate_response(user_input)
-                run_script() 
+                date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+                run_script(date) 
                 st.write(response)
-                if "video_normal.mp4" in os.listdir(): 
-                    st.video('video_normal.mp4', format="video/mp4", start_time=0, subtitles=None, end_time=None, loop=False)
+                if 'video_normal.mp4' in os.listdir(f'video_output/{date}'): 
+                    st.video(f'video_output/{date}/video_normal.mp4', format="video/mp4", start_time=0, subtitles=None, end_time=None, loop=False)
         message = {"role": "assistant", "content": response}
         st.session_state.messages.append(message)
 
