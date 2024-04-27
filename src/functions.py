@@ -48,7 +48,7 @@ def run_script(date : str):
 
     comm.reset(4)
     comm.add_character('chars/Female2', initial_room='kitchen')
-    s, g = comm.environment_graph()
+    _, g = comm.environment_graph()
 
     script = []
     success_actions = []
@@ -65,7 +65,7 @@ def run_script(date : str):
 
     print('script:', script)
 
-    success, message = comm.render_script(script=script,
+    _, _ = comm.render_script(script=script,
                                         frame_rate=10,
                                         processing_time_limit=60,
                                         find_solution=False,
@@ -91,7 +91,7 @@ def run_script(date : str):
                 print(f"Error deleting file {file_path}: {e}")
                 
 
-    path_video = f"./Output"
+    path_video = "./Output"
     video_output_path = f'video_output/{date}'
 
     try:
