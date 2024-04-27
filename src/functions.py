@@ -124,7 +124,7 @@ def run_script():
     failed_objects = [obj for obj in OBJECTS if obj not in success_objects]
     ACTIONS = []
     OBJECTS = []
-    return json.dumps({"actions": success_actions, "object": success_actions, 'failed_actions': failed_actions, 'failed_objects': failed_objects})
+    return json.dumps({"success_actions": success_actions, "success_objects": success_actions, 'failed_actions': failed_actions, 'failed_objects': failed_objects})
 
 if __name__ == "__main__":
     run_script()
