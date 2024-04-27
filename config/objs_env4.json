@@ -1,0 +1,415 @@
+{
+  "facecream": [
+    "grab",
+    "pour",
+    "move",
+    "CREAM"
+  ],
+  "clothespile": [
+    "grab",
+    "CAN_OPEN",
+    "CONTAINERS",
+    "move"
+  ],
+  "bathroomcabinet": [
+    "SURFACES",
+    "CAN_OPEN",
+    "CONTAINERS"
+  ],
+  "bathroomcounter": [
+    "SURFACES"
+  ],
+  "bed": [
+    "SURFACES",
+    "sit",
+    "lie"
+  ],
+  "book": [
+    "grab",
+    "cut",
+    "CAN_OPEN",
+    "read",
+    "HAS_PAPER",
+    "move"
+  ],
+  "bookshelf": [
+    "SURFACES",
+    "CONTAINERS"
+  ],
+  "dishbowl": [
+    "grab",
+    "RECIPIENT",
+    "move"
+  ],
+  "box": [
+    "grab",
+    "RECIPIENT",
+    "CAN_OPEN",
+    "CONTAINERS",
+    "COVER_OBJECT",
+    "move"
+  ],
+  "cabinet": [
+    "SURFACES",
+    "CAN_OPEN",
+    "CONTAINERS"
+  ],
+  "rug": [
+    "SURFACES",
+    "grab",
+    "sit",
+    "lie",
+    "move"
+  ],
+  "radio": [
+    "SURFACES",
+    "grab",
+    "CAN_OPEN",
+    "HAS_SWITCH",
+    "HAS_PLUG",
+    "move"
+  ],
+  "ceiling": [],
+  "cellphone": [
+    "grab",
+    "HAS_SWITCH",
+    "HAS_PLUG",
+    "move"
+  ],
+  "chair": [
+    "SURFACES",
+    "grab",
+    "sit",
+    "move"
+  ],
+  "dishwashingliquid": [
+    "grab",
+    "pour",
+    "move",
+    "CREAM"
+  ],
+  "closet": [
+    "CAN_OPEN",
+    "CONTAINERS"
+  ],
+  "clothespants": [
+    "grab",
+    "hang",
+    "CLOTHES",
+    "move"
+  ],
+  "clothesshirt": [
+    "grab",
+    "hang",
+    "CLOTHES",
+    "move"
+  ],
+  "coffeemaker": [
+    "RECIPIENT",
+    "CAN_OPEN",
+    "HAS_SWITCH",
+    "CONTAINERS",
+    "HAS_PLUG",
+    "move"
+  ],
+  "mug": [
+    "grab",
+    "RECIPIENT",
+    "pour",
+    "move"
+  ],
+  "coffeepot": [
+    "grab",
+    "RECIPIENT",
+    "CAN_OPEN",
+    "move"
+  ],
+  "computer": [
+    "HAS_SWITCH",
+    "look"
+  ],
+  "remotecontrol": [
+    "grab",
+    "HAS_SWITCH",
+    "move"
+  ],
+  "cookingpot": [
+    "grab",
+    "RECIPIENT",
+    "CAN_OPEN",
+    "move"
+  ],
+  "sofa": [
+    "SURFACES",
+    "sit",
+    "lie",
+    "move"
+  ],
+  "waterglass": [
+    "grab",
+    "RECIPIENT",
+    "pour",
+    "move"
+  ],
+  "wineglass": [
+    "grab",
+    "RECIPIENT",
+    "pour",
+    "move"
+  ],
+  "curtains": [
+    "CAN_OPEN",
+    "COVER_OBJECT",
+    "move"
+  ],
+  "desk": [
+    "SURFACES",
+    "CAN_OPEN",
+    "move"
+  ],
+  "dishwasher": [
+    "CAN_OPEN",
+    "HAS_SWITCH",
+    "CONTAINERS"
+  ],
+  "door": [
+    "CAN_OPEN"
+  ],
+  "wallpictureframe": [
+    "grab",
+    "hang",
+    "HAS_PAPER",
+    "move"
+  ],
+  "barsoap": [
+    "grab",
+    "move",
+    "CREAM"
+  ],
+  "faucet": [
+    "HAS_SWITCH"
+  ],
+  "floor": [
+    "SURFACES"
+  ],
+  "folder": [
+    "grab",
+    "CAN_OPEN",
+    "read",
+    "CONTAINERS",
+    "HAS_PAPER",
+    "move"
+  ],
+  "breadslice": [
+    "grab",
+    "eat",
+    "cut",
+    "move"
+  ],
+  "cereal": [
+    "grab",
+    "eat",
+    "move"
+  ],
+  "cupcake": [
+    "grab",
+    "eat",
+    "move"
+  ],
+  "pie": [
+    "grab",
+    "eat",
+    "cut",
+    "move"
+  ],
+  "pudding": [
+    "grab",
+    "eat",
+    "cut",
+    "move"
+  ],
+  "chocolatesyrup": [
+    "grab",
+    "eat",
+    "cut",
+    "move"
+  ],
+  "bananas": [
+    "grab",
+    "move"
+  ],
+  "cutlets": [
+    "grab",
+    "move"
+  ],
+  "mincedmeat": [
+    "grab",
+    "move"
+  ],
+  "condimentshaker": [
+    "grab",
+    "eat",
+    "pour",
+    "move"
+  ],
+  "fridge": [
+    "CAN_OPEN",
+    "HAS_SWITCH",
+    "CONTAINERS",
+    "HAS_PLUG"
+  ],
+  "hanger": [
+    "grab",
+    "hang",
+    "move"
+  ],
+  "keyboard": [
+    "grab",
+    "HAS_PLUG",
+    "move"
+  ],
+  "kitchencabinet": [
+    "SURFACES",
+    "CAN_OPEN",
+    "CONTAINERS"
+  ],
+  "kitchencounter": [
+    "SURFACES"
+  ],
+  "lightswitch": [
+    "HAS_SWITCH",
+    "HAS_PLUG"
+  ],
+  "microwave": [
+    "CAN_OPEN",
+    "HAS_SWITCH",
+    "CONTAINERS",
+    "HAS_PLUG"
+  ],
+  "mouse": [
+    "grab",
+    "HAS_PLUG",
+    "move"
+  ],
+  "mousemat": [
+    "SURFACES",
+    "move"
+  ],
+  "nightstand": [
+    "SURFACES",
+    "CAN_OPEN",
+    "CONTAINERS"
+  ],
+  "condimentbottle": [
+    "grab",
+    "pour",
+    "move",
+    "CREAM"
+  ],
+  "stove": [
+    "SURFACES",
+    "CAN_OPEN",
+    "HAS_SWITCH",
+    "CONTAINERS"
+  ],
+  "wallphone": [
+    "grab",
+    "HAS_SWITCH",
+    "HAS_PLUG",
+    "move"
+  ],
+  "pillow": [
+    "grab",
+    "move"
+  ],
+  "plate": [
+    "SURFACES",
+    "grab",
+    "RECIPIENT",
+    "move"
+  ],
+  "hairproduct": [
+    "grab",
+    "pour",
+    "CAN_OPEN",
+    "move"
+  ],
+  "slippers": [
+    "grab",
+    "hang",
+    "CLOTHES",
+    "move"
+  ],
+  "stall": [],
+  "sink": [
+    "RECIPIENT",
+    "CONTAINERS"
+  ],
+  "washingsponge": [
+    "grab",
+    "move"
+  ],
+  "kitchentable": [
+    "SURFACES",
+    "move"
+  ],
+  "tv": [
+    "HAS_SWITCH",
+    "look",
+    "HAS_PLUG"
+  ],
+  "toaster": [
+    "HAS_SWITCH",
+    "CONTAINERS",
+    "HAS_PLUG",
+    "move"
+  ],
+  "toilet": [
+    "sit",
+    "CAN_OPEN",
+    "CONTAINERS"
+  ],
+  "toiletpaper": [
+    "grab",
+    "hang",
+    "cut",
+    "COVER_OBJECT",
+    "HAS_PAPER",
+    "move"
+  ],
+  "toothpaste": [
+    "grab",
+    "pour",
+    "CAN_OPEN",
+    "move",
+    "CREAM"
+  ],
+  "toothbrush": [
+    "grab",
+    "RECIPIENT",
+    "move"
+  ],
+  "towel": [
+    "grab",
+    "COVER_OBJECT",
+    "move"
+  ],
+  "towelrack": [
+    "SURFACES",
+    "grab",
+    "move"
+  ],
+  "oventray": [
+    "SURFACES",
+    "grab",
+    "move"
+  ],
+  "wall": [],
+  "washingmachine": [
+    "RECIPIENT",
+    "CAN_OPEN",
+    "HAS_SWITCH",
+    "CONTAINERS",
+    "HAS_PLUG"
+  ]
+}
