@@ -9,8 +9,8 @@ from openai import OpenAI
 import openai
 import streamlit as st
 
-import audio.transcribe as transcribe
-from functions import perform_action_on_object, run_script
+import src.audio.transcribe as transcribe
+from src.functions import perform_action_on_object, run_script
 
 import os
 import re

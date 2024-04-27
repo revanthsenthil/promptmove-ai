@@ -1,6 +1,6 @@
 from virtualhome.simulation.unity_simulator import UnityCommunication
 from virtualhome.simulation.unity_simulator import utils_viz
-from utils import find_nodes
+from src.utils import find_nodes
 
 import os
 import json
