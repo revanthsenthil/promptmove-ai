@@ -14,7 +14,6 @@ from src.functions import perform_action_on_object, run_script
 from src.log import log
 
 import os
-import re
 import json
 import datetime
 
@@ -52,7 +51,7 @@ def create_assistant():
                 "type": "function",
                     "function": {
                         "name": "perform_action_on_object",
-                        "description": f"Perform an action to an object in the house",
+                        "description": "Perform an action to an object in the house",
                         "parameters": {
                             "type": "object",
                             "properties": {
