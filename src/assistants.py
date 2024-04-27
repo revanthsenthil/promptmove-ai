@@ -17,8 +17,6 @@ import re
 import json
 import datetime
 
-p = os.path.abspath("../config")
-
 def create_assistant():
 
     # gets the environment variable OPENAI_API_KEY

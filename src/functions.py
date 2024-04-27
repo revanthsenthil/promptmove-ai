@@ -65,6 +65,11 @@ def run_script(date : str):
 
     print('script:', script)
 
+    # if the script is empty, return the list of successful and failed actions and objects
+    if len(script) == 0:
+        return json.dumps({"success_actions": success_actions, "success_objects": success_actions, 'failed_actions': ACTIONS, 'failed_objects': OBJECTS})
+
+    # render the images from the script
     _, _ = comm.render_script(script=script,
                                         frame_rate=10,
                                         processing_time_limit=60,
@@ -79,6 +84,7 @@ def run_script(date : str):
 
     print(os.listdir(directory))
 
+    
     for filename in os.listdir(directory):
         if filename.endswith(".png"):
             file_path = directory + filename
