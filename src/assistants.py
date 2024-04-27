@@ -90,10 +90,15 @@ def create_assistant():
     
     # Use the upload and poll SDK helper to upload the files, add them to the vector store,
     # and poll the status of the file batch for completion.
-    _ = client.beta.vector_stores.file_batches.upload_and_poll(
-        vector_store_id = vector_store.id, 
-        files = file_streams
-    )
+    try:
+        _ = client.beta.vector_stores.file_batches.upload_and_poll(
+            vector_store_id = vector_store.id, 
+            files = file_streams
+        )
+    except openai.InternalServerError:
+        st.error("Error uploading files. ")
+        print("Error uploading files.")
+        pass
 
     # update assistant to use new vector store
     assistant = client.beta.assistants.update(
@@ -163,7 +168,6 @@ def generate_response(user_input):
                     "output": function_response,
                 }
             )
-        run_script()
     else:
         # No tool calls
         print("No tool calls.")
@@ -324,7 +328,8 @@ def main():
     if st.session_state.messages[-1]["role"] != "assistant":
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
-                response = generate_response(user_input) 
+                response = generate_response(user_input)
+                run_script() 
                 st.write(response)
                 if "video_normal.mp4" in os.listdir(): 
                     st.video('video_normal.mp4', format="video/mp4", start_time=0, subtitles=None, end_time=None, loop=False)

@@ -20,12 +20,33 @@ def get_current_weather(location, unit="fahrenheit"):
 def perform_action_on_object(action, object):
     """Perform an action on an object in a virtual home environment"""
     print(f"Running perform_action_on_object({action}, {object})")
+    global ACTIONS, OBJECTS
+
+    with open('../config/all_object_info.json') as f:
+        object_info = json.load(f)
+
+    object = object.lower()
+    action = action.lower()
+
+    acceptable_actions = ['walk']
+
+    # check if object and action are acceptable
+    if object not in object_info:
+        print(f"failed to find {object}")
+        return json.dumps({"action": action, "object": object, "status": f"failed to find {object}"})
+    elif action not in object_info[object] and action not in acceptable_actions:
+        print(f"failed to find {action} for {object}")
+        return json.dumps({"action": action, "object": object, "status": f"failed to perform {action} on {object}"})
+
+    # Append objects and actions to list for the script
     ACTIONS.append(action)
     OBJECTS.append(object)
-    return json.dumps({"action": action, "object": object})
+    print(f"Appended {action} on {object} to the list")
+    return json.dumps({"action": action, "object": object, "status": "success"})
 
-def run_script(ACTIONS=ACTIONS, OBJECTS=OBJECTS):
+def run_script():
     """Run the scrupt for performing actions on objects in a virtual home environment"""
+    global ACTIONS, OBJECTS
     print(f"Running run_script({ACTIONS}, {OBJECTS})")
 
     from virtualhome.simulation.unity_simulator import UnityCommunication
@@ -57,6 +78,7 @@ def run_script(ACTIONS=ACTIONS, OBJECTS=OBJECTS):
         
 
     success, message = comm.render_script(script=script,
+                                        frame_rate=10,
                                         processing_time_limit=60,
                                         find_solution=False,
                                         image_width=320,
@@ -89,7 +111,13 @@ def run_script(ACTIONS=ACTIONS, OBJECTS=OBJECTS):
 
     utils_viz.generate_video(input_path=path_video, prefix='relax', output_path='.')
 
-    return json.dumps({"actions": ACTIONS, "object": OBJECTS})
+    # reset everything
+    comm.close()
+    acts = ACTIONS
+    objs = OBJECTS
+    ACTIONS = []
+    OBJECTS = []
+    return json.dumps({"actions": acts, "object": objs})
 
 if __name__ == "__main__":
     run_script()
