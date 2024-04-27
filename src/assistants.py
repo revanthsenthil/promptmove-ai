@@ -325,8 +325,9 @@ def main():
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
                 response = generate_response(user_input) 
-                st.write(response) 
-                # st.video('video_normal.mp4', format="video/mp4", start_time=0, subtitles=None, end_time=None, loop=False)
+                st.write(response)
+                if "video_normal.mp4" in os.listdir(): 
+                    st.video('video_normal.mp4', format="video/mp4", start_time=0, subtitles=None, end_time=None, loop=False)
         message = {"role": "assistant", "content": response}
         st.session_state.messages.append(message)
 

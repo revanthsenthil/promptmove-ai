@@ -24,7 +24,7 @@ def perform_action_on_object(action, object):
     OBJECTS.append(object)
     return json.dumps({"action": action, "object": object})
 
-def run_script():
+def run_script(ACTIONS=ACTIONS, OBJECTS=OBJECTS):
     """Run the scrupt for performing actions on objects in a virtual home environment"""
     print(f"Running run_script({ACTIONS}, {OBJECTS})")
 
@@ -39,9 +39,9 @@ def run_script():
     from scripts.utils_demo import get_scene_cameras,display_scene_cameras,display_grid_img,find_nodes,add_node,add_edge
 
 
-    file_name = "../scripts/windows_exec.v2.3.0\VirtualHome.exe" # path to executable
+    file_name = "linux_exec/linux_exec.v2.3.0.x86_64" # path to executable
 
-    comm = UnityCommunication(file_name=file_name, port="8081", timeout_wait=120)
+    comm = UnityCommunication(file_name=file_name, port="8081", x_display='0', timeout_wait=120)
 
     # Generating Scripts
 
@@ -83,6 +83,13 @@ def run_script():
                 
 
     path_video = f"./Output"
+
+    if os.path.exists('video_normal.mp4'):
+        os.remove('video_normal.mp4')
+
     utils_viz.generate_video(input_path=path_video, prefix='relax', output_path='.')
 
     return json.dumps({"actions": ACTIONS, "object": OBJECTS})
+
+if __name__ == "__main__":
+    run_script()
