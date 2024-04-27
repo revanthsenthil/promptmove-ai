@@ -1,4 +1,14 @@
 
+from virtualhome.simulation.unity_simulator import UnityCommunication
+from virtualhome.simulation.unity_simulator import utils_viz
+
+import matplotlib.pyplot as plt
+import datetime
+from tqdm import tqdm
+import os
+
+from scripts.utils_demo import get_scene_cameras,display_scene_cameras,display_grid_img,find_nodes,add_node,add_edge
+
 import json
 
 ACTIONS = []
@@ -49,19 +59,8 @@ def run_script():
     global ACTIONS, OBJECTS
     print(f"Running run_script({ACTIONS}, {OBJECTS})")
 
-    from virtualhome.simulation.unity_simulator import UnityCommunication
-    from virtualhome.simulation.unity_simulator import utils_viz
-
-    import matplotlib.pyplot as plt
-    import datetime
-    from tqdm import tqdm
-    import os
-
-    from scripts.utils_demo import get_scene_cameras,display_scene_cameras,display_grid_img,find_nodes,add_node,add_edge
-
-
     file_name = "linux_exec/linux_exec.v2.3.0.x86_64" # path to executable
-
+    
     comm = UnityCommunication(file_name=file_name, port="8081", x_display='0', timeout_wait=120)
 
     # Generating Scripts
@@ -71,11 +70,19 @@ def run_script():
     s, g = comm.environment_graph()
 
     script = []
-    
+    success_actions = []
+    success_objects = []
     for obj, act in zip(OBJECTS, ACTIONS):
-        object = find_nodes(g, class_name=obj)[0]
+        try:
+            object = find_nodes(g, class_name=obj)[0]
+        except IndexError:
+            print(f"Object {obj} not found in the environment")
+            continue
         script.append('<char0> [{}] <{}> ({})'.format(act, obj, object['id']))
-        
+        success_actions.append(act)
+        success_objects.append(obj)
+
+    print('script:', script)
 
     success, message = comm.render_script(script=script,
                                         frame_rate=10,
@@ -113,11 +120,11 @@ def run_script():
 
     # reset everything
     comm.close()
-    acts = ACTIONS
-    objs = OBJECTS
+    failed_actions = [act for act in ACTIONS if act not in success_actions]
+    failed_objects = [obj for obj in OBJECTS if obj not in success_objects]
     ACTIONS = []
     OBJECTS = []
-    return json.dumps({"actions": acts, "object": objs})
+    return json.dumps({"actions": success_actions, "object": success_actions, 'failed_actions': failed_actions, 'failed_objects': failed_objects})
 
 if __name__ == "__main__":
     run_script()

@@ -9,8 +9,8 @@ from openai import OpenAI
 import openai
 import streamlit as st
 
-import src.audio.transcribe as transcribe
-from src.functions import get_current_weather, perform_action_on_object, run_script
+import audio.transcribe as transcribe
+from functions import get_current_weather, perform_action_on_object, run_script
 
 import os
 import re
@@ -96,7 +96,6 @@ def create_assistant():
             files = file_streams
         )
     except openai.InternalServerError:
-        st.error("Error uploading files. ")
         print("Error uploading files.")
         pass
 
