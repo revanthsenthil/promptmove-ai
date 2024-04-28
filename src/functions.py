@@ -37,7 +37,7 @@ def perform_action_on_object(action, object):
     log(f"Appended {action} on {object} to the list")
     return json.dumps({"action": action, "object": object, "status": "success"})
 
-def run_script(date : str):
+def run_script(date : str, frame_rate : int = 10, image_width : int = 320, image_height : int = 240):
     """Run the scrupt for performing actions on objects in a virtual home environment"""
     global ACTIONS, OBJECTS, GRAPH, COMM
     log(f"Running run_script({ACTIONS}, {OBJECTS})")
@@ -106,11 +106,11 @@ def run_script(date : str):
     # render the images from the script
     try:
         _, _ = COMM.render_script(script=script,
-                                            frame_rate=10, # linear time increase
+                                            frame_rate=frame_rate, # linear time increase
                                             processing_time_limit=60,
                                             find_solution=False,
-                                            image_width=320,
-                                            image_height=240,  # linear time increase
+                                            image_width=image_width,
+                                            image_height=image_height,  # linear time increase
                                             skip_animation=False,
                                             recording=True,
                                             save_pose_data=True,

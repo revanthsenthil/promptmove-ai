@@ -251,6 +251,10 @@ def main():
             st.session_state.openai_key = st.text_input('Enter OpenAI API Key:', type='password')
             check_key()
 
+        st.title('Video Controls')
+        st.session_state.framerate = st.slider('Framerate', min_value=1, max_value=30, value=10, step=1)
+        st.session_state.width = st.slider('Video Width', min_value=10, max_value=1920, value=320, step=10)
+        st.session_state.height = st.slider('Video Height', min_value=10, max_value=1080, value=240, step=10)
         st.markdown('[GitHub repo](https://github.com/revanthsenthil/promptmove-ai)')
 
     if not st.session_state.correct_key:
@@ -300,7 +304,7 @@ def main():
                 response = generate_response(user_input)
                 log(f'Response: {response}')
                 date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-                run_script(date) 
+                run_script(date, st.session_state.framerate, st.session_state.width, st.session_state.height) 
                 st.write(response)
                 if date in os.listdir('video_output') and 'video_normal.mp4' in os.listdir(f'video_output/{date}'): 
                     st.video(f'video_output/{date}/video_normal.mp4', format="video/mp4", start_time=0, subtitles=None, end_time=None, loop=False)
