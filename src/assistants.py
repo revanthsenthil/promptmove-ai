@@ -22,8 +22,9 @@ def create_assistant():
     # gets the environment variable OPENAI_API_KEY
     try:
         client = OpenAI(api_key=st.session_state.openai_key)
-    except openai.OpenAIError:
+    except openai.OpenAIError as e:
         st.error("Error creating client instance. Please check your credentials.")
+        log(f"Error creating client instance. Please check your credentials: {e}")
         return None
     
     # Get possible objects and actions
@@ -50,8 +51,8 @@ def create_assistant():
                 The function you have access to is 'perform_action_on_object'. \
                 If the user references an object or action that is not in the list, but is similar to an object or action in the list, the assistant will attempt to \
                 perform the action on the similar object. \
-                The user exists by the bed in the bedroom, and so if they request an object be brought to them, it should be brought to the 'bed' object. \
-                If they request an object you must first 'grab' that object before 'walk' to the user.",
+                The user exists on the sofa in the livingroom, and so if they request an object be brought to them, it should be brought to the 'sofa' object. \
+                If they request an object you must first 'grab' that object before 'walk' to the 'sofa'.",
             model="gpt-4-turbo",
             tools=
             [
@@ -80,7 +81,7 @@ def create_assistant():
         )
     except openai.OpenAIError as e:
         st.error("Error creating assistant. Please check your credentials.")
-        log(e)
+        log(f"Error creating assistant. Please check your credentials: {e}")
         return None
     
     # Create one thread per user
