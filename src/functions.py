@@ -156,9 +156,7 @@ def run_script(date : str, frame_rate : int = 10, image_width : int = 320, image
 if __name__ == "__main__":
     import datetime
     date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    perform_action_on_object("walk", "microwave")
-    perform_action_on_object("grab", "bananas")
-    perform_action_on_object("walk", "sofa")
-
+    perform_action_on_object("walk", "fridge")
+    perform_action_on_object("open", "fridge")
 
     run_script(date)
