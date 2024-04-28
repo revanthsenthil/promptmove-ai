@@ -42,8 +42,10 @@ def create_assistant():
                 to help with tasks around the house, such as cooking, cleaning, organizing, retrieving items, and general knowledge about the state of the house. \
                 You can ask me to perform actions on objects in the house. For example, you can ask me to 'walk to the kitchen' or 'find the microwave'. \
                 Every possible object and action is listed as follows: {str(json.dumps(object_info))}. \
-                The action on 'walk' and 'find' are also acceptable for each object. If an action is in all caps, this tells specific information about the object, \
-                however, it is not an acceptable action to perform on that object. ",
+                The action of 'walk' and 'find' are also acceptable for each object. If an action is in all caps, this tells specific information about the object, \
+                however, it is not an acceptable action to perform on that object. The function you have access to is 'perform_action_on_object'. \
+                If the user references an object or action that is not in the lsit, but is similar to an object or action in the list, the assistant will attempt to \
+                perform the action on the similar object. ",
             model="gpt-4-turbo",
             tools=
             [
@@ -156,12 +158,12 @@ def run_assistant(client, assistant, thread, run):
     # If the run is not completed or requires action, return the status
     else:
         log(f"Error: {run.status}")
-        return f"Error: {run.status}"
+        return f"Error: {run.status}. Please try again."
 
 
 # Function for generating LLM response
 def generate_response(user_input):
-    log(f"\nRunning generate_response({user_input})")
+    log(f"Running generate_response({user_input})")
 
     if user_input in [None, ""] or not isinstance(user_input, str):
         return "Invalid input. Please try again."
@@ -264,6 +266,10 @@ def main():
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.write(message["content"])
+            if message["role"] == "assistant" and "video" in message:
+                date = message["video"]
+                if date in os.listdir('video_output') and 'video_normal.mp4' in os.listdir(f'video_output/{date}'): 
+                    st.video(f'video_output/{date}/video_normal.mp4', format="video/mp4", start_time=0, subtitles=None, end_time=None, loop=False)
 
     # User-provided input
     if user_input := st.chat_input():
@@ -292,7 +298,7 @@ def main():
                 st.write(response)
                 if date in os.listdir('video_output') and 'video_normal.mp4' in os.listdir(f'video_output/{date}'): 
                     st.video(f'video_output/{date}/video_normal.mp4', format="video/mp4", start_time=0, subtitles=None, end_time=None, loop=False)
-        message = {"role": "assistant", "content": response}
+        message = {"role": "assistant", "content": response, "video": date}
         st.session_state.messages.append(message)
 
     # Display button

@@ -1,5 +1,6 @@
 import os
 import streamlit as st
+import datetime
 
 def log(message):
 
@@ -11,5 +12,6 @@ def log(message):
 
     # Log to a file
     with open(f"logs/log{num}.txt", "a") as f:
-        print(message, file=f)
+        date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        print(f'[{date}] {message}', file=f)
 

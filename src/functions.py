@@ -8,6 +8,7 @@ import json
 
 ACTIONS = []
 OBJECTS = []
+POSITION = [0, 0, 0]
     
 def perform_action_on_object(action, object):
     """Perform an action on an object in a virtual home environment"""
@@ -37,7 +38,7 @@ def perform_action_on_object(action, object):
 
 def run_script(date : str):
     """Run the scrupt for performing actions on objects in a virtual home environment"""
-    global ACTIONS, OBJECTS
+    global ACTIONS, OBJECTS, POSITION
     log(f"Running run_script({ACTIONS}, {OBJECTS})")
 
     if len(ACTIONS) == 0 and len(OBJECTS) == 0:
@@ -49,9 +50,10 @@ def run_script(date : str):
 
     # Base Environment Setup
     comm.reset(4)
-    comm.add_character('chars/Female2', initial_room='kitchen')
+    comm.add_character('chars/Female2', position=POSITION) # initial_room='kitchen')
     _, g = comm.environment_graph()
-
+    log(f"Initial character position: {POSITION}")
+    
     # Find the nodes for the objects and actions
     script = []
     success_actions = []
@@ -84,7 +86,16 @@ def run_script(date : str):
                                         save_pose_data=True,
                                         file_name_prefix=date)
     
+    # update character position
+    _, g = comm.environment_graph()
+    try:
+        POSITION = g['nodes'][0]['obj_transform']['position']
+        log(f"Character position: {POSITION}")
+    except IndexError:
+        log("Character position not found in the environment")
+        POSITION = [0, 0, 0]
 
+    # output paths
     path_video = "./Output"
     video_output_path = f'video_output/{date}'
 
@@ -96,6 +107,7 @@ def run_script(date : str):
     if os.path.exists(os.path.join(video_output_path, 'video_normal.mp4')):
         os.remove(os.path.join(video_output_path, 'video_normal.mp4'))
 
+    # generate video
     utils_viz.generate_video(input_path=path_video, prefix=date, output_path=video_output_path)
 
     # reset everything
@@ -109,5 +121,5 @@ def run_script(date : str):
 if __name__ == "__main__":
     import datetime
     date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    perform_action_on_object("walk", "box")
+    perform_action_on_object("walk", "sofa")
     run_script(date)
