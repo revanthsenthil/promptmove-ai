@@ -36,28 +36,27 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y portaudio19-dev
+          sudo apt-get install ffmpeg libsm6 libxext6  -y
 
       # Installs dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -e .
-      
-      # Google Cloud SDK
-      #- id: 'auth'
-      #  uses: 'google-github-actions/auth@v2'
 
-      #- name: 'Set up Cloud SDK'
-      #  uses: 'google-github-actions/setup-gcloud@v2'
-
-      #- name: 'Use gcloud CLI'
-      #  run: 'gcloud info'
+      - name: Install Unity Simulation
+        run: |
+          cd src
+          wget http://virtual-home.org//release/simulator/v2.0/v2.3.0/linux_exec.zip
+          unzip linux_exec.zip -d linux_exec
+          cd .. 
 
       # Runs tests
       - name: Run tests
         run: |
           python -m pip install pytest
           export PYTHONPATH=".:$PYTHONPATH"
+          rm -rf /opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/virtualhome/__init__.py
           pytest tests
       
       # linter
