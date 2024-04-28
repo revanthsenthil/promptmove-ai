@@ -10,7 +10,8 @@ ACTIONS = []
 OBJECTS = []
 GRAPH = None
 COMM = None
-    
+
+
 def perform_action_on_object(action, object):
     """Perform an action on an object in a virtual home environment"""
     log(f"Running perform_action_on_object({action}, {object})")
@@ -37,12 +38,12 @@ def perform_action_on_object(action, object):
     log(f"Appended {action} on {object} to the list")
     return json.dumps({"action": action, "object": object, "status": "success"})
 
-def run_script(date : str, frame_rate : int = 10, image_width : int = 320, image_height : int = 240):
+def run_script(date : str, frame_rate : int = 10, image_width : int = 320, image_height : int = 240, actions=ACTIONS, objects=OBJECTS):
     """Run the scrupt for performing actions on objects in a virtual home environment"""
     global ACTIONS, OBJECTS, GRAPH, COMM
-    log(f"Running run_script({ACTIONS}, {OBJECTS})")
+    log(f"Running run_script({actions}, {objects})")
 
-    if len(ACTIONS) == 0 and len(OBJECTS) == 0:
+    if len(actions) == 0 and len(objects) == 0:
         log(json.dumps({"success_actions": [], "success_objects": [], 'failed_actions': [], 'failed_objects': []}))
         return
     
@@ -53,6 +54,8 @@ def run_script(date : str, frame_rate : int = 10, image_width : int = 320, image
         log("Connected to Unity")
     except Exception as e:
         log(f"Failed to connect to Unity: {e}")
+        ACTIONS = []
+        OBJECTS = []
         return
 
     # Base Environment Setup
@@ -85,7 +88,7 @@ def run_script(date : str, frame_rate : int = 10, image_width : int = 320, image
         script.append('<char1> [{}] <{}> ({})'.format('sit', 'sofa', sofa['id']))
 
     # append the script for the actions and objects
-    for obj, act in zip(OBJECTS, ACTIONS):
+    for obj, act in zip(objects, actions):
         try:
             object = find_nodes(g, class_name=obj)[0]
         except IndexError:
@@ -101,6 +104,8 @@ def run_script(date : str, frame_rate : int = 10, image_width : int = 320, image
     if len(script) == 1:
         log(json.dumps({"success_actions": [], "success_objects": [], 'failed_actions': [], 'failed_objects': []}))
         COMM.close()
+        ACTIONS = []
+        OBJECTS = []
         return
 
     # render the images from the script
@@ -146,8 +151,8 @@ def run_script(date : str, frame_rate : int = 10, image_width : int = 320, image
 
     # reset everything
     COMM.close()
-    failed_actions = [act for act in ACTIONS if act not in success_actions]
-    failed_objects = [obj for obj in OBJECTS if obj not in success_objects]
+    failed_actions = [act for act in actions if act not in success_actions]
+    failed_objects = [obj for obj in objects if obj not in success_objects]
     ACTIONS = []
     OBJECTS = []
     log(json.dumps({"success_actions": success_actions, "success_objects": success_objects, 'failed_actions': failed_actions, 'failed_objects': failed_objects}))
