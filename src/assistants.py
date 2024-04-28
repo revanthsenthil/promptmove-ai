@@ -22,8 +22,9 @@ def create_assistant():
     # gets the environment variable OPENAI_API_KEY
     try:
         client = OpenAI(api_key=st.session_state.openai_key)
-    except openai.OpenAIError:
+    except openai.OpenAIError as e:
         st.error("Error creating client instance. Please check your credentials.")
+        log(f"Error creating client instance. Please check your credentials: {e}")
         return None
     
     # Get possible objects and actions
@@ -50,8 +51,8 @@ def create_assistant():
                 The function you have access to is 'perform_action_on_object'. \
                 If the user references an object or action that is not in the list, but is similar to an object or action in the list, the assistant will attempt to \
                 perform the action on the similar object. \
-                The user exists by the bed in the bedroom, and so if they request an object be brought to them, it should be brought to the 'bed' object. \
-                If they request an object you must first 'grab' that object before 'walk' to the user.",
+                The user exists on the sofa in the livingroom, and so if they request an object be brought to them, it should be brought to the 'sofa' object. \
+                If they request an object you must first 'grab' that object before 'walk' to the 'sofa'.",
             model="gpt-4-turbo",
             tools=
             [
@@ -80,7 +81,7 @@ def create_assistant():
         )
     except openai.OpenAIError as e:
         st.error("Error creating assistant. Please check your credentials.")
-        log(e)
+        log(f"Error creating assistant. Please check your credentials: {e}")
         return None
     
     # Create one thread per user
@@ -221,7 +222,7 @@ def main():
         num = 0
         while os.path.exists(f"logs/log{num}.txt"):
             num += 1
-        st.session_state.log = num
+        st.session_state.log = f"logs/log{num}.txt"
     
     # Set up sidebar for OpenAI API key credentials
     with st.sidebar:
@@ -250,6 +251,11 @@ def main():
             st.session_state.openai_key = st.text_input('Enter OpenAI API Key:', type='password')
             check_key()
 
+        st.title('Video Controls')
+        st.session_state.framerate = st.slider('Framerate', min_value=1, max_value=30, value=10, step=1)
+        st.session_state.width = st.slider('Video Width', min_value=10, max_value=1920, value=320, step=10)
+        st.session_state.height = st.slider('Video Height', min_value=10, max_value=1080, value=240, step=10)   
+        
         st.markdown('[GitHub repo](https://github.com/revanthsenthil/promptmove-ai)')
 
     if not st.session_state.correct_key:
@@ -299,10 +305,15 @@ def main():
                 response = generate_response(user_input)
                 log(f'Response: {response}')
                 date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-                run_script(date) 
+                run_script(date, st.session_state.framerate, st.session_state.width, st.session_state.height) 
                 st.write(response)
                 if date in os.listdir('video_output') and 'video_normal.mp4' in os.listdir(f'video_output/{date}'): 
                     st.video(f'video_output/{date}/video_normal.mp4', format="video/mp4", start_time=0, subtitles=None, end_time=None, loop=False)
+                with st.sidebar:
+                    if os.path.isfile(st.session_state.log):
+                        with open(st.session_state.log, 'r') as f:
+                            logs = '\n'.join(f.readlines())
+                        st.text_area('Log', value=logs, height=500, label_visibility='hidden')
         message = {"role": "assistant", "content": response, "video": date}
         st.session_state.messages.append(message)
 
