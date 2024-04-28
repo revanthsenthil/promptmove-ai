@@ -33,6 +33,7 @@ def create_assistant():
         actions = set([action for obj in object_info for action in object_info[obj]])
         actions.add('walk')
         actions.add('find')
+        actions.add('run')
         actions.add('open')
         actions.add('close')
         actions = list(actions)
@@ -44,11 +45,13 @@ def create_assistant():
                 to help with tasks around the house, such as cooking, cleaning, organizing, retrieving items, and general knowledge about the state of the house. \
                 You can ask me to perform actions on objects in the house. For example, you can ask me to 'walk to the kitchen' or 'find the microwave'. \
                 Every possible object and action is listed as follows: {str(json.dumps(object_info))}. \
-                The action of 'walk', 'find', are also acceptable for each object. Actions of 'open' and 'close' are acceptable if 'CAN_OPEN' is an action for that object. \
+                The action of 'walk', 'find', and 'run' are also acceptable for each object. Actions of 'open' and 'close' are acceptable if 'CAN_OPEN' is an action for that object. \
                 If an action is in all caps, this tells specific information about the object, however, it is not an acceptable action to perform on that object. \
                 The function you have access to is 'perform_action_on_object'. \
                 If the user references an object or action that is not in the list, but is similar to an object or action in the list, the assistant will attempt to \
-                perform the action on the similar object. ",
+                perform the action on the similar object. \
+                The user exists by the bed in the bedroom, and so if they request an object be brought to them, it should be brought to the 'bed' object. \
+                If they request an object you must first 'grab' that object before 'walk' to the user.",
             model="gpt-4-turbo",
             tools=
             [
