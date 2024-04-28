@@ -9,7 +9,7 @@ def log(message):
         os.mkdir("logs")
 
     num = st.session_state.get("log", 0)
-
+    
     # Log to a file
     with open(f"logs/log{num}.txt", "a") as f:
         date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
