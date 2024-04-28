@@ -38,7 +38,7 @@ def perform_action_on_object(action, object):
     log(f"Appended {action} on {object} to the list")
     return json.dumps({"action": action, "object": object, "status": "success"})
 
-def run_script(date : str, frame_rate : int = 10, image_width : int = 320, image_height : int = 240, actions=ACTIONS, objects=OBJECTS):
+def run_script(date : str, frame_rate : int = 10, image_width : int = 320, image_height : int = 240, actions=ACTIONS, objects=OBJECTS, no_graphics=False):
     """Run the scrupt for performing actions on objects in a virtual home environment"""
     global ACTIONS, OBJECTS, GRAPH, COMM
     log(f"Running run_script({actions}, {objects})")
@@ -50,7 +50,7 @@ def run_script(date : str, frame_rate : int = 10, image_width : int = 320, image
     # Initialize Unity COMMunication
     file_name = "linux_exec/linux_exec.v2.3.0.x86_64" # path to executable
     try:
-        COMM = UnityCommunication(file_name=file_name, port="8081", x_display='0', timeout_wait=120)
+        COMM = UnityCommunication(file_name=file_name, port="8081", x_display='0', timeout_wait=120, no_graphics=no_graphics)
         log("Connected to Unity")
     except Exception as e:
         log(f"Failed to connect to Unity: {e}")
