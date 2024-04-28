@@ -1,5 +1,6 @@
 import os
 import streamlit as st
+import datetime
 
 def log(message):
 
@@ -8,8 +9,9 @@ def log(message):
         os.mkdir("logs")
 
     num = st.session_state.get("log", 0)
-
+    
     # Log to a file
     with open(f"logs/log{num}.txt", "a") as f:
-        print(message, file=f)
+        date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        print(f'[{date}] {message}', file=f)
 

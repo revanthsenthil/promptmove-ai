@@ -8,6 +8,8 @@ import json
 
 ACTIONS = []
 OBJECTS = []
+GRAPH = None
+COMM = None
     
 def perform_action_on_object(action, object):
     """Perform an action on an object in a virtual home environment"""
@@ -19,7 +21,7 @@ def perform_action_on_object(action, object):
 
     object = object.lower().replace(" ", "")
 
-    acceptable_actions = ['walk', 'find']
+    acceptable_actions = ['walk', 'find', 'open', 'close', 'run']
 
     # check if object and action are acceptable
     if object not in object_info:
@@ -37,20 +39,39 @@ def perform_action_on_object(action, object):
 
 def run_script(date : str):
     """Run the scrupt for performing actions on objects in a virtual home environment"""
-    global ACTIONS, OBJECTS
+    global ACTIONS, OBJECTS, GRAPH, COMM
     log(f"Running run_script({ACTIONS}, {OBJECTS})")
 
     if len(ACTIONS) == 0 and len(OBJECTS) == 0:
-        return json.dumps({"success_actions": [], "success_objects": [], 'failed_actions': [], 'failed_objects': []})
+        log(json.dumps({"success_actions": [], "success_objects": [], 'failed_actions': [], 'failed_objects': []}))
+        return
     
-    # Initialize Unity Communication
+    # Initialize Unity COMMunication
     file_name = "linux_exec/linux_exec.v2.3.0.x86_64" # path to executable
-    comm = UnityCommunication(file_name=file_name, port="8081", x_display='0', timeout_wait=120)
+    try:
+        COMM = UnityCommunication(file_name=file_name, port="8081", x_display='0', timeout_wait=120)
+    except Exception:
+        try:
+            COMM.close()
+            COMM = UnityCommunication(file_name=file_name, port="8081", x_display='0', timeout_wait=120)
+        except Exception as e:
+            log(f"Failed to connect to Unity: {e}")
+            return
 
     # Base Environment Setup
-    comm.reset(4)
-    comm.add_character('chars/Female2', initial_room='kitchen')
-    _, g = comm.environment_graph()
+    if GRAPH is None:
+        COMM.reset(4)
+        COMM.add_character('chars/Female2', initial_room='kitchen')
+        COMM.add_character('chars/Male1', initial_room='bedroom')
+    else:
+        log("Expanding the scene")
+        COMM.reset(4)
+        COMM.expand_scene(GRAPH)
+
+    # get and save environmet graph
+    _, g = COMM.environment_graph()
+    GRAPH = g
+    log(f"Initial character position: {g['nodes'][0]['obj_transform']['position']}")
 
     # Find the nodes for the objects and actions
     script = []
@@ -70,10 +91,11 @@ def run_script(date : str):
 
     # if the script is empty, return the list of successful and failed actions and objects
     if len(script) == 0:
-        return json.dumps({"success_actions": success_actions, "success_objects": success_objects, 'failed_actions': ACTIONS, 'failed_objects': OBJECTS})
+        log(json.dumps({"success_actions": [], "success_objects": [], 'failed_actions': [], 'failed_objects': []}))
+        return
 
     # render the images from the script
-    _, _ = comm.render_script(script=script,
+    _, _ = COMM.render_script(script=script,
                                         frame_rate=10,
                                         processing_time_limit=60,
                                         find_solution=False,
@@ -84,7 +106,16 @@ def run_script(date : str):
                                         save_pose_data=True,
                                         file_name_prefix=date)
     
+    # update environemnt graph
+    _, g = COMM.environment_graph()
+    try:
+        GRAPH = g
+        log(f"Final Character position: {GRAPH['nodes'][0]['obj_transform']['position']}")
+    except IndexError:
+        GRAPH = None
+        log("Character position not found in the environment")
 
+    # output paths
     path_video = "./Output"
     video_output_path = f'video_output/{date}'
 
@@ -96,18 +127,22 @@ def run_script(date : str):
     if os.path.exists(os.path.join(video_output_path, 'video_normal.mp4')):
         os.remove(os.path.join(video_output_path, 'video_normal.mp4'))
 
+    # generate video
     utils_viz.generate_video(input_path=path_video, prefix=date, output_path=video_output_path)
 
     # reset everything
-    comm.close()
+    COMM.close()
     failed_actions = [act for act in ACTIONS if act not in success_actions]
     failed_objects = [obj for obj in OBJECTS if obj not in success_objects]
     ACTIONS = []
     OBJECTS = []
-    return json.dumps({"success_actions": success_actions, "success_objects": success_objects, 'failed_actions': failed_actions, 'failed_objects': failed_objects})
+    log(json.dumps({"success_actions": success_actions, "success_objects": success_objects, 'failed_actions': failed_actions, 'failed_objects': failed_objects}))
+    return 
 
 if __name__ == "__main__":
     import datetime
     date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    perform_action_on_object("walk", "box")
+    perform_action_on_object("walk", "fridge")
+    perform_action_on_object("open", "fridge")
+
     run_script(date)
