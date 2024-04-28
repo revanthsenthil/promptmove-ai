@@ -80,7 +80,7 @@ def run_script(date : str, frame_rate : int = 10, image_width : int = 320, image
     try:
         sofa = find_nodes(g, class_name='sofa')[0]
     except IndexError:
-        log(f"Object {obj} not found in the environment")
+        log("Object sofa not found in the environment")
     else:
         script.append('<char1> [{}] <{}> ({})'.format('sit', 'sofa', sofa['id']))
 
