@@ -23,7 +23,7 @@ def test_run_script_success():
     if os.path.isfile("logs/log.txt"):
         os.remove("logs/log.txt")
 
-    run_script("2021-07-01_12-00-00", frame_rate=10, image_width=320, image_height=240, actions=acts, objects=objs, no_graphics=True)
+    run_script("2021-07-01_12-00-00", frame_rate=10, image_width=320, image_height=240, actions=acts, objects=objs, no_graphics=True, testing=True)
 
     assert os.path.isfile("logs/log.txt")
     assert os.path.isdir("Output/2021-07-01_12-00-00")
@@ -51,7 +51,7 @@ def test_run_script_failure():
     if os.path.isfile("logs/log.txt"):
         os.remove("logs/log.txt")
 
-    run_script("2021-07-01_12-00-01", frame_rate=10, image_width=320, image_height=240, actions=acts, objects=objs, no_graphics=True)
+    run_script("2021-07-01_12-00-01", frame_rate=10, image_width=320, image_height=240, actions=acts, objects=objs, no_graphics=True, testing=True)
 
     assert os.path.isfile("logs/log.txt")
     assert os.path.isdir("Output/2021-07-01_12-00-01")
