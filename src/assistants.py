@@ -285,9 +285,10 @@ def main():
 
     # User-provided input
     if user_input := st.chat_input():
-        st.session_state.messages.append({"role": "user", "content": user_input})
-        with st.chat_message("user"):
-           st.write(user_input)
+        if st.session_state.messages[-1]["role"] == "assistant":
+            st.session_state.messages.append({"role": "user", "content": user_input})
+            with st.chat_message("user"):
+                st.write(user_input)
 
     # Record and transcribe user speech on button click
     if st.session_state.clicked:
@@ -299,11 +300,16 @@ def main():
         st.session_state.clicked = False
 
     # Generate a new response if last message is not from assistant
-    if st.session_state.messages[-1]["role"] != "assistant":
+    if st.session_state.messages[-1]["role"] == "user" and st.session_state.messages[-2]["role"] == "assistant":
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
-                response = generate_response(user_input)
+                try:
+                    response = generate_response(user_input)
+                except openai.BadRequestError as e:
+                    response = f"Error: {e}"
                 log(f'Response: {response}')
+                if 'Error: Error code: 400' in response:
+                    response = "Please Restart the Program."
                 date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
                 run_script(date, st.session_state.framerate, st.session_state.width, st.session_state.height) 
                 st.write(response)
