@@ -128,7 +128,7 @@ def run_script(date : str, frame_rate : int = 10, image_width : int = 320, image
     
     # update environemnt graph
     _, g2 = comm.environment_graph()
-    print(g2)
+
     try:
         GRAPH = g2
         log(f"Final Character position: {g2['nodes'][0]['obj_transform']['position']}")
