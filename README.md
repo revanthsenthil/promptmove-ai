@@ -42,6 +42,13 @@ wget http://virtual-home.org//release/simulator/v2.0/v2.3.0/linux_exec.zip
 unzip linux_exec.zip -d linux_exec
 ```
 
+### Fix VirtualHome
+VirtualHome currently has a bug in their code. In order to fix this, you must remove the `virtualhome/__init__.py` file from the installed virtualhome package.
+If you installed with conda, this can be done as seen below. Edit thsi script for your specific directory names
+```bash
+rm -f ~/anaconda3/envs/promptmove/lib/python3.9/site-packages/virtualhome/__init__.py
+```
+
 ### Testing
 In the `/promptmove-ai` directory, you may run our tests to ensure promptmove-ai was setup and installed correctly. If you have pytest installed you may run our test suite.
 ```bash
